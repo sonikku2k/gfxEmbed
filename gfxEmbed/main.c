@@ -9,7 +9,16 @@
 
 #include <msp430.h>
 #include "timer.h"
+#include "gfxEmbedLib/gfxEmbedLib.h"
 
+
+
+//------------------------------------------- Code development area ---------------------------------------------------------------------------------
+
+#define toggle ^=
+#define clear &= ~
+#define set |=
+#define CSEL(y, x)  (P1 ##x y BIT0)
 
 //------------------------------------------- Main Function -----------------------------------------------------------------------------------------
 int main(void){
@@ -41,8 +50,8 @@ int main(void){
     InitTimerSystem();
 
     for(;;){
-      Delay(1000);
-      P1OUT ^= 0x01;                        // Toggle P1.0 using exclusive-OR
+      Delay(500);
+      CSEL(toggle, OUT);
     }
 }
 
