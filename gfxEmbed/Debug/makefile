@@ -13,6 +13,7 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./timer.obj" \
 "./gfxEmbedLib/Drivers/nt75451.obj" \
+"./gfxEmbedLib/gfxEmbedLib.obj" \
 "../lnk_msp430g2553.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -26,8 +27,10 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include gfxEmbedLib/Drivers/subdir_vars.mk
+-include gfxEmbedLib/subdir_vars.mk
 -include subdir_rules.mk
 -include gfxEmbedLib/Drivers/subdir_rules.mk
+-include gfxEmbedLib/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -158,8 +161,8 @@ gfxEmbed.txt: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "timer.obj" "gfxEmbedLib\Drivers\nt75451.obj" 
-	-$(RM) "main.d" "timer.d" "gfxEmbedLib\Drivers\nt75451.d" 
+	-$(RM) "main.obj" "timer.obj" "gfxEmbedLib\Drivers\nt75451.obj" "gfxEmbedLib\gfxEmbedLib.obj" 
+	-$(RM) "main.d" "timer.d" "gfxEmbedLib\Drivers\nt75451.d" "gfxEmbedLib\gfxEmbedLib.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

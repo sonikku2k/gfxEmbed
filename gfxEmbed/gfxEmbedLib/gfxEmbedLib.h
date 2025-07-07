@@ -17,7 +17,7 @@
 
 // Function Prototypes
 //--------------------
-void init_gfx(void);
+void Init_gfx(void);
 
 
 

@@ -1,5 +1,6 @@
 "./main.obj"
 "./timer.obj"
 "./gfxEmbedLib/Drivers/nt75451.obj"
+"./gfxEmbedLib/gfxEmbedLib.obj"
 "../lnk_msp430g2553.cmd"
 -llibc.a

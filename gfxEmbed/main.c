@@ -9,16 +9,16 @@
 
 #include <msp430.h>
 #include "timer.h"
-#include "gfxEmbedLib/gfxEmbedLib.h"
+#include "gfxEmbedLib/gfxEmbedLib.h"      // Include embedded graphics library
 
 
 
 //------------------------------------------- Code development area ---------------------------------------------------------------------------------
 
-#define toggle ^=
-#define clear &= ~
-#define set |=
-#define CSEL(y, x)  (P1 ##x y BIT0)
+//#define toggle ^=
+//#define clear &= ~
+//#define set |=
+//#define CSEL(y, x)  (P1 ##x y BIT0)
 
 //------------------------------------------- Main Function -----------------------------------------------------------------------------------------
 int main(void){
@@ -37,7 +37,7 @@ int main(void){
 
     // Configure ports
     //------------------
-    P1DIR = 0x41;                               // P1.0 is connected to the leftmost green LED
+    P1DIR = 0xFF;                               // P1.0 is connected to the leftmost green LED
     P1OUT = 0x00;
 
 
@@ -49,9 +49,10 @@ int main(void){
     __enable_interrupt();                       // Enable System interrupts
     InitTimerSystem();
 
+    //Init_gfx();                                 // Initialize graphics driver
     for(;;){
-      Delay(500);
-      CSEL(toggle, OUT);
+      Delay (100);
+      Init_gfx();                                 // Initialize graphics driver
     }
 }
 

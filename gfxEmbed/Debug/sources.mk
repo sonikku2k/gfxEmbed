@@ -113,4 +113,5 @@ PDE_DEPS__QUOTED :=
 SUBDIRS := \
 . \
 gfxEmbedLib/Drivers \
+gfxEmbedLib \
 
