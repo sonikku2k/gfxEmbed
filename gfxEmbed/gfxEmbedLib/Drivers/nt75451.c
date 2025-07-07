@@ -49,16 +49,14 @@ void InitDriver(void){
 
 
 
-// Name: sendSPICmd
-// Function: Sends the byte over the SPI bus as a command (C/D = 0)
-// Parameters: Data byte to send
-// Returns: void
-//----------------------------------------------------------------------------------------------------------
-void sendSPICmd(uint8_t data){
+
+// Name: sendSPI
+// SPI transmit function
+// By default this is the bit-banger or you can hook a transmit function to real hardware
+//---------------------------------------------------------------------------------------
+void sendSPI(uint8_t data){
 
     uint8_t bitcount = 0;
-
-
     // Loop to shift out the data bits, MSB first
     for (bitcount = 0; bitcount < 8; bitcount++){
         if((data & 0x80) == 0x80){
@@ -74,10 +72,34 @@ void sendSPICmd(uint8_t data){
         asm (" nop");
         SCLK(clear, SCLK_PORT);
     }
+
 }
 
+// Name: sendSPICmd
+// Function: Sends the byte over the SPI bus as a command (C/D = 0)
+// Parameters: Data byte to send
+// Returns: void
+//----------------------------------------------------------------------------------------------------------
+void sendSPICmd(uint8_t cmdbyte){
 
+    CMD_DATA(clear, CMD_DATA_PORT);     // C/D = 0
+    CS(clear, CS_PORT);                 // Lower CS
+    sendSPI(cmdbyte);                   // tx command
+    CS(set, CS_PORT);                   // Raise CS
+}
 
+// Name: sendSPIData
+// Function: Sends the byte over the SPI bus as data (C/D = 1)
+// Parameters: Data byte to send
+// Returns: void
+//----------------------------------------------------------------------------------------------------------
+void sendSPIData(uint8_t databyte){
+
+    CMD_DATA(set, CMD_DATA_PORT);       // C/D = 1
+    CS(clear, CS_PORT);                 // Lower CS
+    sendSPI(databyte);            // tx data
+    CS(set, CS_PORT);                   // Raise CS
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // Name: InitDisplay
@@ -86,7 +108,7 @@ void sendSPICmd(uint8_t data){
 // Returns: void
 //--------------------------------------------------------------------------------------------------------------
 void InitDisplay(void){
-    sendSPICmd(0xAA);
+    sendSPICmd(0x41);
 }
 
 
