@@ -50,6 +50,7 @@
 //--------------------
 void InitDriver(void);
 void InitDisplay(void);
+void ClearDisplay(void);
 
 
 

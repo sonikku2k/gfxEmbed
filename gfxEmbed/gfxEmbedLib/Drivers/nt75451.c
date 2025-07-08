@@ -10,7 +10,11 @@
 
 #include <stdint.h>             // Use standardized types
 #include "gfxdriver.h"          // Include common display header
+#include "timer.h"
 
+
+// Variables
+uint8_t column = 0;
 
 // Functions
 //---------------------------
@@ -108,11 +112,87 @@ void sendSPIData(uint8_t databyte){
 // Returns: void
 //--------------------------------------------------------------------------------------------------------------
 void InitDisplay(void){
-    sendSPICmd(0x41);
+    sendSPICmd(0xAC);       // Static indicator off
+    sendSPICmd(0xA0);       // ADC SELECT
+    sendSPICmd(0xC0);       // SHL SELECT
+    sendSPICmd(0x40);       // Initial Display Line
+    sendSPICmd(0x00);       // Column address LSB
+    sendSPICmd(0xA6);       // Reverse display OFF
+    sendSPICmd(0x24);       // Set e-Volume = 4
+    sendSPICmd(0x81);       // Set Vref mode
+    sendSPICmd(0x17);       // Value for reference voltage
+    sendSPICmd(0xE1);       // Reset Power Save
+    sendSPICmd(0x2F);       // Turn power ON
+    sendSPICmd(0xAF);       // Turn display ON
 }
 
 
+//--------------------------------------------------------------------------------------------------------------
+// Name: ClearDisplay
+// Function: Clears display memory i.e. 0x00 is written, all pixels per byte = OFF
+// Parameters: void
+// Returns: void
+//--------------------------------------------------------------------------------------------------------------
+void ClearDisplay(void){
+    int i = 0;
+    uint8_t offset, tmp, tg = 0;
 
+    sendSPICmd(0xB0);
+    sendSPICmd(0x10);
+    sendSPICmd(0x00);
+    column = 0;
+    for (i = 0; i < 160; i++){
+
+        if (i >= 128){
+
+            offset = 159 - column;      // (160 - 128 = 32)
+            offset += 0x60; 
+            //offset = 0x60;
+            sendSPICmd(0xB4);
+            tmp = offset;
+            tmp = tmp >> 4;
+            tmp |= 0x10;
+            sendSPICmd(tmp);
+            tmp = offset & 0x0F;
+            sendSPICmd(tmp);
+            
+
+        }
+        tg ^= 0x01;
+        if (tg == 0x01){
+            sendSPIData(0x55);   
+        } else {
+            sendSPIData(0xAA); 
+        }
+        column++;
+    }
+
+ /*   offset = 0x60;
+    sendSPICmd(0xB4);
+    tmp = offset;
+    tmp = tmp >> 4;
+    tmp |= 0x10;
+    sendSPICmd(tmp);
+    tmp = offset & 0x0F;
+    sendSPICmd(tmp);
+    sendSPIData(0x55); */
+
+    
+    // Select Next page and column to get the rest of the line.. 
+/*    sendSPICmd(0xB4);
+    sendSPICmd(0x16);
+    sendSPICmd(0x00);
+
+   // Here the buffer is reverse read to fill the rest of the display WTAF
+    for (i = 0; i < 32; i++){
+        sendSPIData(0xFF);      
+    }
+
+    */
+
+
+
+}
 
 
 

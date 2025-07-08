@@ -49,10 +49,10 @@ int main(void){
     __enable_interrupt();                       // Enable System interrupts
     InitTimerSystem();
 
-    //Init_gfx();                                 // Initialize graphics driver
+    Init_gfx();                                 // Initialize graphics driver
     for(;;){
       Delay (100);
-      Init_gfx();                                 // Initialize graphics driver
+      //Init_gfx();                                 // Initialize graphics driver
     }
 }
 
