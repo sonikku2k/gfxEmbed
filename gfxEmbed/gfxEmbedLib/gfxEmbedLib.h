@@ -10,6 +10,8 @@
 #ifndef GFXEMBEDLIB_H_
 #define GFXEMBEDLIB_H_
 
+#include <stdint.h>             // Use standardized types
+
 // Definitions
 //--------------------
 
@@ -18,6 +20,7 @@
 // Function Prototypes
 //--------------------
 void Init_gfx(void);
+void Put_graphic(uint8_t *bmp);
 
 
 

@@ -14,6 +14,14 @@
 
 
 
+// Name: Put_graphic
+// Function: Fill entire LCD with graphics using a function exposed by the library
+// Parameters: Pointer to array that contains bitmap data
+// Returns: void
+//---------------------------------------------------------------------------------
+void Put_graphic(uint8_t *bmp){
+    WriteFSGraphic(bmp);
+}
 
 
 // Name: Init_gfx

@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Jul 11 13:57:52 2025
+>> Linked Fri Jul 11 14:54:51 2025
 
 OUTPUT FILE NAME:   <gfxEmbed.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c312
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c3ba
 
 
 MEMORY CONFIGURATION
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  00000424  00003bba  RWIX
+  FLASH                 0000c000   00003fde  0000074c  00003892  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -55,42 +55,46 @@ section   page    origin      length       input sections
                   000003b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    0000040a     
-                  0000c000    00000094     nt75451.obj (.text:ClearDisplay)
-                  0000c094    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000c110    00000060     nt75451.obj (.text:InitDisplay)
-                  0000c170    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
-                  0000c1bc    00000042                     : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  0000c1fe    00000040     main.obj (.text:main)
-                  0000c23e    0000003a     nt75451.obj (.text:sendSPI)
-                  0000c278    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
-                  0000c2a4    0000002c                     : lsl16.asm.obj (.text)
-                  0000c2d0    00000024     nt75451.obj (.text:InitDriver)
-                  0000c2f4    0000001e     nt75451.obj (.text:setColumnAddress)
-                  0000c312    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  0000c32e    0000001a     main.obj (.text:watchdog_timer)
-                  0000c348    00000016     gfxEmbedLib.obj (.text:Init_gfx)
-                  0000c35e    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000c372    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c384    00000012                     : memcpy.c.obj (.text:memcpy)
-                  0000c396    00000012     nt75451.obj (.text:sendSPICmd)
-                  0000c3a8    00000012     nt75451.obj (.text:sendSPIData)
-                  0000c3ba    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
-                  0000c3ca    0000000e     timer.obj (.text:Delay)
-                  0000c3d8    0000000e     nt75451.obj (.text:setPageAddress)
-                  0000c3e6    0000000a     timer.obj (.text:CallInISR)
-                  0000c3f0    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c3f8    00000006     timer.obj (.text:InitTimerSystem)
-                  0000c3fe    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
-                  0000c404    00000004                     : pre_init.c.obj (.text:_system_pre_init)
-                  0000c408    00000002                     : startup.c.obj (.text:_system_post_cinit)
+.text      0    0000c000    000004b2     
+                  0000c000    000000a0     nt75451.obj (.text:WriteFSGraphic)
+                  0000c0a0    00000094     nt75451.obj (.text:ClearDisplay)
+                  0000c134    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0000c1b0    00000060     nt75451.obj (.text:InitDisplay)
+                  0000c210    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
+                  0000c25c    00000048     main.obj (.text:main)
+                  0000c2a4    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0000c2e6    0000003a     nt75451.obj (.text:sendSPI)
+                  0000c320    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
+                  0000c34c    0000002c                     : lsl16.asm.obj (.text)
+                  0000c378    00000024     nt75451.obj (.text:InitDriver)
+                  0000c39c    0000001e     nt75451.obj (.text:setColumnAddress)
+                  0000c3ba    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
+                  0000c3d6    0000001a     main.obj (.text:watchdog_timer)
+                  0000c3f0    00000016     gfxEmbedLib.obj (.text:Init_gfx)
+                  0000c406    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000c41a    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c42c    00000012                     : memcpy.c.obj (.text:memcpy)
+                  0000c43e    00000012     nt75451.obj (.text:sendSPICmd)
+                  0000c450    00000012     nt75451.obj (.text:sendSPIData)
+                  0000c462    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
+                  0000c472    0000000e     timer.obj (.text:Delay)
+                  0000c480    0000000e     nt75451.obj (.text:setPageAddress)
+                  0000c48e    0000000a     timer.obj (.text:CallInISR)
+                  0000c498    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000c4a0    00000006     timer.obj (.text:InitTimerSystem)
+                  0000c4a6    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
+                  0000c4ac    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+                  0000c4b0    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.cinit     0    0000c40a    0000001a     
-                  0000c40a    00000007     (.cinit..data.load) [load image, compression = lzss]
-                  0000c411    00000001     --HOLE-- [fill = 0]
-                  0000c412    00000006     (__TI_handler_table)
-                  0000c418    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000c41c    00000008     (__TI_cinit_table)
+.const     0    0000c4b2    00000280     
+                  0000c4b2    00000280     main.obj (.const:.string:Testbmp)
+
+.cinit     0    0000c732    0000001a     
+                  0000c732    00000007     (.cinit..data.load) [load image, compression = lzss]
+                  0000c739    00000001     --HOLE-- [fill = 0]
+                  0000c73a    00000006     (__TI_handler_table)
+                  0000c740    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000c744    00000008     (__TI_cinit_table)
 
 .binit     0    0000c000    00000000     
 
@@ -154,10 +158,10 @@ MODULE SUMMARY
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     90     2         2      
+       main.obj                     98     642       2      
        timer.obj                    30     0         2      
     +--+----------------------------+------+---------+---------+
-       Total:                       120    2         4      
+       Total:                       128    642       4      
                                                             
     .\gfxEmbedLib\
        gfxEmbedLib.obj              22     0         0      
@@ -165,9 +169,9 @@ MODULE SUMMARY
        Total:                       22     0         0      
                                                             
     .\gfxEmbedLib\Drivers\
-       nt75451.obj                  418    0         6      
+       nt75451.obj                  578    0         6      
     +--+----------------------------+------+---------+---------+
-       Total:                       418    0         6      
+       Total:                       578    0         6      
                                                             
     C:\ti\ccs2010\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430_eabi.lib
        copy_decompress_lzss.c.obj   124    0         0      
@@ -202,19 +206,19 @@ MODULE SUMMARY
        Stack:                       0      0         80     
        Linker Generated:            0      25        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 1034   53        90     
+       Grand Total:                 1202   693       90     
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000c41c records: 2, size/record: 4, table size: 8
-	.data: load addr=0000c40a, load size=00000007 bytes, run addr=00000200, run size=00000006 bytes, compression=lzss
-	.bss: load addr=0000c418, load size=00000004 bytes, run addr=00000206, run size=00000004 bytes, compression=zero_init
+__TI_cinit_table @ 0000c744 records: 2, size/record: 4, table size: 8
+	.data: load addr=0000c732, load size=00000007 bytes, run addr=00000200, run size=00000006 bytes, compression=lzss
+	.bss: load addr=0000c740, load size=00000004 bytes, run addr=00000206, run size=00000004 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000c412 records: 3, size/record: 2, table size: 6
+__TI_handler_table @ 0000c73a records: 3, size/record: 2, table size: 6
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -234,7 +238,7 @@ address   name
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
 00000053  BCSCTL3                       
-0000c3fe  C$$EXIT                       
+0000c4a6  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 000010fb  CALBC1_12MHZ                  
@@ -246,10 +250,10 @@ address   name
 000010fe  CALDCO_1MHZ                   
 000010fc  CALDCO_8MHZ                   
 0000005b  CAPD                          
-0000c3e6  CallInISR                     
-0000c000  ClearDisplay                  
+0000c48e  CallInISR                     
+0000c0a0  ClearDisplay                  
 00000056  DCOCTL                        
-0000c3ca  Delay                         
+0000c472  Delay                         
 00000128  FCTL1                         
 0000012a  FCTL2                         
 0000012c  FCTL3                         
@@ -257,10 +261,10 @@ address   name
 00000001  IE2                           
 00000002  IFG1                          
 00000003  IFG2                          
-0000c110  InitDisplay                   
-0000c2d0  InitDriver                    
-0000c3f8  InitTimerSystem               
-0000c348  Init_gfx                      
+0000c1b0  InitDisplay                   
+0000c378  InitDriver                    
+0000c4a0  InitTimerSystem               
+0000c3f0  Init_gfx                      
 00000022  P1DIR                         
 00000025  P1IE                          
 00000024  P1IES                         
@@ -285,6 +289,7 @@ address   name
 00000010  P3REN                         
 0000001b  P3SEL                         
 00000043  P3SEL2                        
+0000c000  Put_graphic                   
 00000172  TA0CCR0                       
 00000174  TA0CCR1                       
 00000176  TA0CCR2                       
@@ -310,6 +315,7 @@ address   name
 000010c0  TLV_CHECKSUM                  
 000010f7  TLV_DCO_30_LEN                
 000010f6  TLV_DCO_30_TAG                
+0000c4b2  Testbmp                       
 0000005d  UCA0ABCTL                     
 00000062  UCA0BR0                       
 00000063  UCA0BR1                       
@@ -332,17 +338,18 @@ address   name
 0000006d  UCB0STAT                      
 0000006f  UCB0TXBUF                     
 00000120  WDTCTL                        
+0000c000  WriteFSGraphic                
 00000400  __STACK_END                   
 00000050  __STACK_SIZE                  
-0000c41c  __TI_CINIT_Base               
-0000c424  __TI_CINIT_Limit              
-0000c424  __TI_CINIT_Warm               
-0000c412  __TI_Handler_Table_Base       
-0000c418  __TI_Handler_Table_Limit      
-0000c3f0  __TI_ISR_TRAP                 
-0000c1bc  __TI_auto_init_nobinit_nopinit
-0000c094  __TI_decompress_lzss          
-0000c372  __TI_decompress_none          
+0000c744  __TI_CINIT_Base               
+0000c74c  __TI_CINIT_Limit              
+0000c74c  __TI_CINIT_Warm               
+0000c73a  __TI_Handler_Table_Base       
+0000c740  __TI_Handler_Table_Limit      
+0000c498  __TI_ISR_TRAP                 
+0000c2a4  __TI_auto_init_nobinit_nopinit
+0000c134  __TI_decompress_lzss          
+0000c41a  __TI_decompress_none          
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -359,81 +366,81 @@ address   name
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
-0000c35e  __TI_zero_init_nomemset       
+0000c406  __TI_zero_init_nomemset       
 ffffffff  __c_args__                    
-0000c3c6  __mspabi_func_epilog_1        
-0000c3c4  __mspabi_func_epilog_2        
-0000c3c2  __mspabi_func_epilog_3        
-0000c3c0  __mspabi_func_epilog_4        
-0000c3be  __mspabi_func_epilog_5        
-0000c3bc  __mspabi_func_epilog_6        
-0000c3ba  __mspabi_func_epilog_7        
-0000c2a4  __mspabi_slli                 
-0000c2cc  __mspabi_slli_1               
-0000c2ba  __mspabi_slli_10              
-0000c2b8  __mspabi_slli_11              
-0000c2b6  __mspabi_slli_12              
-0000c2b4  __mspabi_slli_13              
-0000c2b2  __mspabi_slli_14              
-0000c2b0  __mspabi_slli_15              
-0000c2ca  __mspabi_slli_2               
-0000c2c8  __mspabi_slli_3               
-0000c2c6  __mspabi_slli_4               
-0000c2c4  __mspabi_slli_5               
-0000c2c2  __mspabi_slli_6               
-0000c2c0  __mspabi_slli_7               
-0000c2be  __mspabi_slli_8               
-0000c2bc  __mspabi_slli_9               
-0000c278  __mspabi_srai                 
-0000c2a0  __mspabi_srai_1               
-0000c28e  __mspabi_srai_10              
-0000c28c  __mspabi_srai_11              
-0000c28a  __mspabi_srai_12              
-0000c288  __mspabi_srai_13              
-0000c286  __mspabi_srai_14              
-0000c284  __mspabi_srai_15              
-0000c29e  __mspabi_srai_2               
-0000c29c  __mspabi_srai_3               
-0000c29a  __mspabi_srai_4               
-0000c298  __mspabi_srai_5               
-0000c296  __mspabi_srai_6               
-0000c294  __mspabi_srai_7               
-0000c292  __mspabi_srai_8               
-0000c290  __mspabi_srai_9               
-0000c170  __mspabi_srli                 
-0000c1b6  __mspabi_srli_1               
-0000c192  __mspabi_srli_10              
-0000c18e  __mspabi_srli_11              
-0000c18a  __mspabi_srli_12              
-0000c186  __mspabi_srli_13              
-0000c182  __mspabi_srli_14              
-0000c17e  __mspabi_srli_15              
-0000c1b2  __mspabi_srli_2               
-0000c1ae  __mspabi_srli_3               
-0000c1aa  __mspabi_srli_4               
-0000c1a6  __mspabi_srli_5               
-0000c1a2  __mspabi_srli_6               
-0000c19e  __mspabi_srli_7               
-0000c19a  __mspabi_srli_8               
-0000c196  __mspabi_srli_9               
-0000c312  _c_int00_noargs               
+0000c46e  __mspabi_func_epilog_1        
+0000c46c  __mspabi_func_epilog_2        
+0000c46a  __mspabi_func_epilog_3        
+0000c468  __mspabi_func_epilog_4        
+0000c466  __mspabi_func_epilog_5        
+0000c464  __mspabi_func_epilog_6        
+0000c462  __mspabi_func_epilog_7        
+0000c34c  __mspabi_slli                 
+0000c374  __mspabi_slli_1               
+0000c362  __mspabi_slli_10              
+0000c360  __mspabi_slli_11              
+0000c35e  __mspabi_slli_12              
+0000c35c  __mspabi_slli_13              
+0000c35a  __mspabi_slli_14              
+0000c358  __mspabi_slli_15              
+0000c372  __mspabi_slli_2               
+0000c370  __mspabi_slli_3               
+0000c36e  __mspabi_slli_4               
+0000c36c  __mspabi_slli_5               
+0000c36a  __mspabi_slli_6               
+0000c368  __mspabi_slli_7               
+0000c366  __mspabi_slli_8               
+0000c364  __mspabi_slli_9               
+0000c320  __mspabi_srai                 
+0000c348  __mspabi_srai_1               
+0000c336  __mspabi_srai_10              
+0000c334  __mspabi_srai_11              
+0000c332  __mspabi_srai_12              
+0000c330  __mspabi_srai_13              
+0000c32e  __mspabi_srai_14              
+0000c32c  __mspabi_srai_15              
+0000c346  __mspabi_srai_2               
+0000c344  __mspabi_srai_3               
+0000c342  __mspabi_srai_4               
+0000c340  __mspabi_srai_5               
+0000c33e  __mspabi_srai_6               
+0000c33c  __mspabi_srai_7               
+0000c33a  __mspabi_srai_8               
+0000c338  __mspabi_srai_9               
+0000c210  __mspabi_srli                 
+0000c256  __mspabi_srli_1               
+0000c232  __mspabi_srli_10              
+0000c22e  __mspabi_srli_11              
+0000c22a  __mspabi_srli_12              
+0000c226  __mspabi_srli_13              
+0000c222  __mspabi_srli_14              
+0000c21e  __mspabi_srli_15              
+0000c252  __mspabi_srli_2               
+0000c24e  __mspabi_srli_3               
+0000c24a  __mspabi_srli_4               
+0000c246  __mspabi_srli_5               
+0000c242  __mspabi_srli_6               
+0000c23e  __mspabi_srli_7               
+0000c23a  __mspabi_srli_8               
+0000c236  __mspabi_srli_9               
+0000c3ba  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000003b0  _stack                        
-0000c408  _system_post_cinit            
-0000c404  _system_pre_init              
-0000c3fe  abort                         
+0000c4b0  _system_post_cinit            
+0000c4ac  _system_pre_init              
+0000c4a6  abort                         
 00000200  column                        
 00000202  display_x_size                
 00000204  display_y_size                
-0000c1fe  main                          
-0000c384  memcpy                        
+0000c25c  main                          
+0000c42c  memcpy                        
 00000201  row                           
-0000c23e  sendSPI                       
-0000c396  sendSPICmd                    
-0000c3a8  sendSPIData                   
-0000c2f4  setColumnAddress              
-0000c3d8  setPageAddress                
-0000c32e  watchdog_timer                
+0000c2e6  sendSPI                       
+0000c43e  sendSPICmd                    
+0000c450  sendSPIData                   
+0000c39c  setColumnAddress              
+0000c480  setPageAddress                
+0000c3d6  watchdog_timer                
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -547,91 +554,94 @@ address   name
 000010fd  CALBC1_8MHZ                   
 000010fe  CALDCO_1MHZ                   
 000010ff  CALBC1_1MHZ                   
-0000c000  ClearDisplay                  
-0000c094  __TI_decompress_lzss          
-0000c110  InitDisplay                   
-0000c170  __mspabi_srli                 
-0000c17e  __mspabi_srli_15              
-0000c182  __mspabi_srli_14              
-0000c186  __mspabi_srli_13              
-0000c18a  __mspabi_srli_12              
-0000c18e  __mspabi_srli_11              
-0000c192  __mspabi_srli_10              
-0000c196  __mspabi_srli_9               
-0000c19a  __mspabi_srli_8               
-0000c19e  __mspabi_srli_7               
-0000c1a2  __mspabi_srli_6               
-0000c1a6  __mspabi_srli_5               
-0000c1aa  __mspabi_srli_4               
-0000c1ae  __mspabi_srli_3               
-0000c1b2  __mspabi_srli_2               
-0000c1b6  __mspabi_srli_1               
-0000c1bc  __TI_auto_init_nobinit_nopinit
-0000c1fe  main                          
-0000c23e  sendSPI                       
-0000c278  __mspabi_srai                 
-0000c284  __mspabi_srai_15              
-0000c286  __mspabi_srai_14              
-0000c288  __mspabi_srai_13              
-0000c28a  __mspabi_srai_12              
-0000c28c  __mspabi_srai_11              
-0000c28e  __mspabi_srai_10              
-0000c290  __mspabi_srai_9               
-0000c292  __mspabi_srai_8               
-0000c294  __mspabi_srai_7               
-0000c296  __mspabi_srai_6               
-0000c298  __mspabi_srai_5               
-0000c29a  __mspabi_srai_4               
-0000c29c  __mspabi_srai_3               
-0000c29e  __mspabi_srai_2               
-0000c2a0  __mspabi_srai_1               
-0000c2a4  __mspabi_slli                 
-0000c2b0  __mspabi_slli_15              
-0000c2b2  __mspabi_slli_14              
-0000c2b4  __mspabi_slli_13              
-0000c2b6  __mspabi_slli_12              
-0000c2b8  __mspabi_slli_11              
-0000c2ba  __mspabi_slli_10              
-0000c2bc  __mspabi_slli_9               
-0000c2be  __mspabi_slli_8               
-0000c2c0  __mspabi_slli_7               
-0000c2c2  __mspabi_slli_6               
-0000c2c4  __mspabi_slli_5               
-0000c2c6  __mspabi_slli_4               
-0000c2c8  __mspabi_slli_3               
-0000c2ca  __mspabi_slli_2               
-0000c2cc  __mspabi_slli_1               
-0000c2d0  InitDriver                    
-0000c2f4  setColumnAddress              
-0000c312  _c_int00_noargs               
-0000c32e  watchdog_timer                
-0000c348  Init_gfx                      
-0000c35e  __TI_zero_init_nomemset       
-0000c372  __TI_decompress_none          
-0000c384  memcpy                        
-0000c396  sendSPICmd                    
-0000c3a8  sendSPIData                   
-0000c3ba  __mspabi_func_epilog_7        
-0000c3bc  __mspabi_func_epilog_6        
-0000c3be  __mspabi_func_epilog_5        
-0000c3c0  __mspabi_func_epilog_4        
-0000c3c2  __mspabi_func_epilog_3        
-0000c3c4  __mspabi_func_epilog_2        
-0000c3c6  __mspabi_func_epilog_1        
-0000c3ca  Delay                         
-0000c3d8  setPageAddress                
-0000c3e6  CallInISR                     
-0000c3f0  __TI_ISR_TRAP                 
-0000c3f8  InitTimerSystem               
-0000c3fe  C$$EXIT                       
-0000c3fe  abort                         
-0000c404  _system_pre_init              
-0000c408  _system_post_cinit            
-0000c412  __TI_Handler_Table_Base       
-0000c418  __TI_Handler_Table_Limit      
-0000c41c  __TI_CINIT_Base               
-0000c424  __TI_CINIT_Limit              
-0000c424  __TI_CINIT_Warm               
+0000c000  Put_graphic                   
+0000c000  WriteFSGraphic                
+0000c0a0  ClearDisplay                  
+0000c134  __TI_decompress_lzss          
+0000c1b0  InitDisplay                   
+0000c210  __mspabi_srli                 
+0000c21e  __mspabi_srli_15              
+0000c222  __mspabi_srli_14              
+0000c226  __mspabi_srli_13              
+0000c22a  __mspabi_srli_12              
+0000c22e  __mspabi_srli_11              
+0000c232  __mspabi_srli_10              
+0000c236  __mspabi_srli_9               
+0000c23a  __mspabi_srli_8               
+0000c23e  __mspabi_srli_7               
+0000c242  __mspabi_srli_6               
+0000c246  __mspabi_srli_5               
+0000c24a  __mspabi_srli_4               
+0000c24e  __mspabi_srli_3               
+0000c252  __mspabi_srli_2               
+0000c256  __mspabi_srli_1               
+0000c25c  main                          
+0000c2a4  __TI_auto_init_nobinit_nopinit
+0000c2e6  sendSPI                       
+0000c320  __mspabi_srai                 
+0000c32c  __mspabi_srai_15              
+0000c32e  __mspabi_srai_14              
+0000c330  __mspabi_srai_13              
+0000c332  __mspabi_srai_12              
+0000c334  __mspabi_srai_11              
+0000c336  __mspabi_srai_10              
+0000c338  __mspabi_srai_9               
+0000c33a  __mspabi_srai_8               
+0000c33c  __mspabi_srai_7               
+0000c33e  __mspabi_srai_6               
+0000c340  __mspabi_srai_5               
+0000c342  __mspabi_srai_4               
+0000c344  __mspabi_srai_3               
+0000c346  __mspabi_srai_2               
+0000c348  __mspabi_srai_1               
+0000c34c  __mspabi_slli                 
+0000c358  __mspabi_slli_15              
+0000c35a  __mspabi_slli_14              
+0000c35c  __mspabi_slli_13              
+0000c35e  __mspabi_slli_12              
+0000c360  __mspabi_slli_11              
+0000c362  __mspabi_slli_10              
+0000c364  __mspabi_slli_9               
+0000c366  __mspabi_slli_8               
+0000c368  __mspabi_slli_7               
+0000c36a  __mspabi_slli_6               
+0000c36c  __mspabi_slli_5               
+0000c36e  __mspabi_slli_4               
+0000c370  __mspabi_slli_3               
+0000c372  __mspabi_slli_2               
+0000c374  __mspabi_slli_1               
+0000c378  InitDriver                    
+0000c39c  setColumnAddress              
+0000c3ba  _c_int00_noargs               
+0000c3d6  watchdog_timer                
+0000c3f0  Init_gfx                      
+0000c406  __TI_zero_init_nomemset       
+0000c41a  __TI_decompress_none          
+0000c42c  memcpy                        
+0000c43e  sendSPICmd                    
+0000c450  sendSPIData                   
+0000c462  __mspabi_func_epilog_7        
+0000c464  __mspabi_func_epilog_6        
+0000c466  __mspabi_func_epilog_5        
+0000c468  __mspabi_func_epilog_4        
+0000c46a  __mspabi_func_epilog_3        
+0000c46c  __mspabi_func_epilog_2        
+0000c46e  __mspabi_func_epilog_1        
+0000c472  Delay                         
+0000c480  setPageAddress                
+0000c48e  CallInISR                     
+0000c498  __TI_ISR_TRAP                 
+0000c4a0  InitTimerSystem               
+0000c4a6  C$$EXIT                       
+0000c4a6  abort                         
+0000c4ac  _system_pre_init              
+0000c4b0  _system_post_cinit            
+0000c4b2  Testbmp                       
+0000c73a  __TI_Handler_Table_Base       
+0000c740  __TI_Handler_Table_Limit      
+0000c744  __TI_CINIT_Base               
+0000c74c  __TI_CINIT_Limit              
+0000c74c  __TI_CINIT_Warm               
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -651,4 +661,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start          
 ffffffff  __c_args__                    
 
-[210 symbols]
+[213 symbols]

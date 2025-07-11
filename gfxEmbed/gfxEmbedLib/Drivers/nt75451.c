@@ -175,7 +175,7 @@ void InitDisplay(void){
 //--------------------------------------------------------------------------------------------------------------
 void ClearDisplay(void){
     uint16_t i, j = 0;
-    uint8_t offset, tg = 0;
+    uint8_t offset = 0;
 
     column = 0;
     row = 0;
@@ -212,4 +212,46 @@ void ClearDisplay(void){
 }
 
 
+// Name: WriteFSGraphic
+// Function: Fill entire LCD with graphics from a source
+// Parameters: Pointer to source of bitmap data
+// Returns: void
+//-----------------------------------------------------------------------------
+void WriteFSGraphic(uint8_t *bmpdata){
+    uint16_t i, j, k = 0;
+    uint8_t offset = 0;
 
+    column = 0;
+    row = 0;
+
+
+    setPageAddress(row);
+    setColumnAddress(column);
+
+    for (j = 0; j < (display_y_size / 8); j++){
+        for (i = 0; i < display_x_size; i++){
+
+            // With this type of controller, if the display is wider than 128 pixels, special handling is required
+            // Majority of displays using this controller (and clones) are 128 pixels wide
+            if (display_x_size > 128){
+                if (i >= 128){
+                    //159
+                    offset = (uint8_t)(display_x_size - 1) - column;      // (160 - 128 = 32)
+                    offset += 0x60; 
+                    setPageAddress(row + (display_y_size / 8));
+                    setColumnAddress(offset);
+
+                }
+        
+            }
+            sendSPIData(bmpdata[k]);
+            k++;
+            column++;
+        }
+        
+        row++;
+        column = 0;
+        setColumnAddress(column);
+        setPageAddress(row);
+    }
+}
