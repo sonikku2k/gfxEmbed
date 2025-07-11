@@ -48,7 +48,7 @@
 
 // Function Prototypes
 //--------------------
-void InitDriver(void);
+void InitDriver(uint16_t x_size, uint16_t y_size);
 void InitDisplay(void);
 void ClearDisplay(void);
 

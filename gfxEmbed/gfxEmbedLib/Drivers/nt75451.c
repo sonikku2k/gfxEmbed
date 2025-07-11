@@ -18,6 +18,9 @@
 uint8_t column = 0;
 uint8_t row = 0;
 
+uint16_t display_x_size = 0;
+uint16_t display_y_size = 0;
+
 // Functions
 //---------------------------
 
@@ -39,7 +42,11 @@ void reset_timer(void){
 // Parameters: void
 // Returns: void
 //----------------------------------------------------------------------------------------------------------
-void InitDriver(void){
+void InitDriver(uint16_t x_size, uint16_t y_size){
+
+    display_x_size = x_size;
+    display_y_size = y_size;
+
     CS(set, CS_PORT);                       // Chip Select = high
     CMD_DATA(clear, CMD_DATA_PORT);         // C/D = low
     RST(clear, RST_PORT);                   // Pull RESET low
@@ -81,6 +88,8 @@ void sendSPI(uint8_t data){
 
 }
 
+
+
 // Name: sendSPICmd
 // Function: Sends the byte over the SPI bus as a command (C/D = 0)
 // Parameters: Data byte to send
@@ -106,6 +115,35 @@ void sendSPIData(uint8_t databyte){
     sendSPI(databyte);            // tx data
     CS(set, CS_PORT);                   // Raise CS
 }
+
+
+// Name: setPageAddress
+// Function: Select Display Page (row) to access 
+// Parameter: Row number (0 is uppermost row)
+// Returns: void
+//----------------------------------------------------------------------------------
+void setPageAddress(uint8_t page){
+    uint8_t tmp = PAGE_ADDRESS_SET;         // Command's four least significant bits are the page address
+    tmp |= (page & 0x0F);
+    sendSPICmd(tmp);
+}
+
+// Name: setColumnAddress
+// Function: Set the column of pixels to access
+// Parameter: Column number (0 = left top corner if row = 0)
+// Returns: void
+//----------------------------------------------------------------------------------
+void setColumnAddress(uint8_t column){
+    uint8_t tmp = column;
+    tmp = tmp >> 4;
+    tmp |= COLUMN_ADDRESS_SET;
+    sendSPICmd(tmp);            // Command bits and upper nibble of column number
+    tmp = column & 0x0F;
+    sendSPICmd(tmp);            // Lower nibble of column number
+}
+
+
+
 
 //--------------------------------------------------------------------------------------------------------------
 // Name: InitDisplay
@@ -136,65 +174,41 @@ void InitDisplay(void){
 // Returns: void
 //--------------------------------------------------------------------------------------------------------------
 void ClearDisplay(void){
-    int i = 0;
-    uint8_t offset, tmp, tg = 0;
+    uint16_t i, j = 0;
+    uint8_t offset, tg = 0;
 
-    sendSPICmd(0xB0);
-    sendSPICmd(0x10);
-    sendSPICmd(0x00);
     column = 0;
     row = 0;
-    for (i = 0; i < 160; i++){
 
-        if (i >= 128){
 
-            offset = 159 - column;      // (160 - 128 = 32)
-            offset += 0x60; 
-            //offset = 0x60;
-            sendSPICmd(0xB4);
-            tmp = offset;
-            tmp = tmp >> 4;
-            tmp |= 0x10;
-            sendSPICmd(tmp);
-            tmp = offset & 0x0F;
-            sendSPICmd(tmp);
-            
+    setPageAddress(row);
+    setColumnAddress(column);
 
+    for (j = 0; j < (display_y_size / 8); j++){
+        for (i = 0; i < display_x_size; i++){
+
+            // With this type of controller, if the display is wider than 128 pixels, special handling is required
+            // Majority of displays using this controller (and clones) are 128 pixels wide
+            if (display_x_size > 128){
+                if (i >= 128){
+                    //159
+                    offset = (uint8_t)(display_x_size - 1) - column;      // (160 - 128 = 32)
+                    offset += 0x60; 
+                    setPageAddress(row + (display_y_size / 8));
+                    setColumnAddress(offset);
+
+                }
+        
+            }
+            sendSPIData(0x00);
+            column++;
         }
-        tg ^= 0x01;
-        if (tg == 0x01){
-            sendSPIData(0x55);   
-        } else {
-            sendSPIData(0xAA); 
-        }
-        column++;
+        
+        row++;
+        column = 0;
+        setColumnAddress(column);
+        setPageAddress(row);
     }
-
- /*   offset = 0x60;
-    sendSPICmd(0xB4);
-    tmp = offset;
-    tmp = tmp >> 4;
-    tmp |= 0x10;
-    sendSPICmd(tmp);
-    tmp = offset & 0x0F;
-    sendSPICmd(tmp);
-    sendSPIData(0x55); */
-
-    
-    // Select Next page and column to get the rest of the line.. 
-/*    sendSPICmd(0xB4);
-    sendSPICmd(0x16);
-    sendSPICmd(0x00);
-
-   // Here the buffer is reverse read to fill the rest of the display WTAF
-    for (i = 0; i < 32; i++){
-        sendSPIData(0xFF);      
-    }
-
-    */
-
-
-
 }
 
 

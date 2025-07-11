@@ -22,7 +22,7 @@
 // Returns: void
 //---------------------------------------------------------------------- 
 void Init_gfx(void){
-    InitDriver();           // Call init in driver
-    InitDisplay();          // Initialize the display attached
-    ClearDisplay();         // Clear display memory
+    InitDriver(160, 32);     // Call init in driver
+    InitDisplay();                          // Initialize the display attached
+    ClearDisplay();                         // Clear display memory
 }
