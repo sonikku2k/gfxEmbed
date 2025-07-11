@@ -9,7 +9,8 @@
 
 #include <msp430.h>
 #include "timer.h"
-#include "gfxEmbedLib/gfxEmbedLib.h"      // Include embedded graphics library
+#include "gfxEmbedLib/gfxEmbedLib.h"          // Include embedded graphics library
+#include "gfxEmbedLib/fonts/hitachi5x7.h"     // Include font as header file
 
 
 
@@ -100,6 +101,24 @@ int main(void){
 
     Init_gfx();                                 // Initialize graphics driver
     Put_graphic(Testbmp);
+    Set_Font(Hitachi);                 // Tell the driver which font is to be used
+    Put_Char('H');                            // Print ASCII 
+    Put_Char('i');
+    Put_Char(' ');
+    Put_Char('I');
+    Put_Char('\'');
+    Put_Char('m');
+    Put_Char(' ');
+    Put_Char('S');
+    Put_Char('o');
+    Put_Char('n');
+    Put_Char('i');
+    Put_Char('c');        
+
+
+
+
+
     for(;;){
       Delay (100);
       //Init_gfx();                                 // Initialize graphics driver

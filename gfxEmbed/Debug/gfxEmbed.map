@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Fri Jul 11 14:54:51 2025
+>> Linked Sat Jul 12 00:15:07 2025
 
 OUTPUT FILE NAME:   <gfxEmbed.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c3ba
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000d074
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
   SFR                   00000000   00000010  00000000  00000010  RWIX
   PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
   PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
-  RAM                   00000200   00000200  0000005a  000001a6  RWIX
+  RAM                   00000200   00000200  00000061  0000019f  RWIX
   INFOD                 00001000   00000040  00000000  00000040  RWIX
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  0000074c  00003892  RWIX
+  FLASH                 0000c000   00003fde  0000118e  00002e50  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -44,57 +44,327 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.data      0    00000200    00000006     UNINITIALIZED
-                  00000200    00000006     nt75451.obj (.data)
+.data      0    00000200    00000009     UNINITIALIZED
+                  00000200    00000009     nt75451.obj (.data)
 
-.bss       0    00000206    00000004     UNINITIALIZED
-                  00000206    00000002     (.common:TIMERCOUNT)
-                  00000208    00000002     (.common:TIME_MEASURE)
+.bss       0    0000020a    00000008     UNINITIALIZED
+                  0000020a    00000002     (.common:TIMERCOUNT)
+                  0000020c    00000002     (.common:TIME_MEASURE)
+                  0000020e    00000002     (.common:font_data_ptr)
+                  00000210    00000001     (.common:Inverted)
+                  00000211    00000001     (.common:masking)
 
 .stack     0    000003b0    00000050     UNINITIALIZED
                   000003b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    000004b2     
-                  0000c000    000000a0     nt75451.obj (.text:WriteFSGraphic)
-                  0000c0a0    00000094     nt75451.obj (.text:ClearDisplay)
-                  0000c134    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000c1b0    00000060     nt75451.obj (.text:InitDisplay)
-                  0000c210    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
-                  0000c25c    00000048     main.obj (.text:main)
-                  0000c2a4    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  0000c2e6    0000003a     nt75451.obj (.text:sendSPI)
-                  0000c320    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
-                  0000c34c    0000002c                     : lsl16.asm.obj (.text)
-                  0000c378    00000024     nt75451.obj (.text:InitDriver)
-                  0000c39c    0000001e     nt75451.obj (.text:setColumnAddress)
-                  0000c3ba    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  0000c3d6    0000001a     main.obj (.text:watchdog_timer)
-                  0000c3f0    00000016     gfxEmbedLib.obj (.text:Init_gfx)
-                  0000c406    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000c41a    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c42c    00000012                     : memcpy.c.obj (.text:memcpy)
-                  0000c43e    00000012     nt75451.obj (.text:sendSPICmd)
-                  0000c450    00000012     nt75451.obj (.text:sendSPIData)
-                  0000c462    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
-                  0000c472    0000000e     timer.obj (.text:Delay)
-                  0000c480    0000000e     nt75451.obj (.text:setPageAddress)
-                  0000c48e    0000000a     timer.obj (.text:CallInISR)
-                  0000c498    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c4a0    00000006     timer.obj (.text:InitTimerSystem)
-                  0000c4a6    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
-                  0000c4ac    00000004                     : pre_init.c.obj (.text:_system_pre_init)
-                  0000c4b0    00000002                     : startup.c.obj (.text:_system_post_cinit)
+.const     0    0000c000    00000b7e     
+                  0000c000    00000280     main.obj (.const:.string:Testbmp)
+                  0000c280    00000200     main.obj (.const:Hitachi)
+                  0000c480    0000001e     main.obj (.const:.string:h5x7_14)
+                  0000c49e    0000001e     main.obj (.const:.string:h5x7_15)
+                  0000c4bc    0000001e     main.obj (.const:.string:h5x7_16)
+                  0000c4da    0000001e     main.obj (.const:.string:h5x7_17)
+                  0000c4f8    0000001e     main.obj (.const:.string:h5x7_20)
+                  0000c516    0000001e     main.obj (.const:.string:h5x7_21)
+                  0000c534    0000001e     main.obj (.const:.string:h5x7_22)
+                  0000c552    00000014     main.obj (.const:.string:h5x7_06)
+                  0000c566    00000013     main.obj (.const:.string:h5x7_03)
+                  0000c579    00000001     --HOLE-- [fill = 0]
+                  0000c57a    00000013     main.obj (.const:.string:h5x7_13)
+                  0000c58d    00000001     --HOLE-- [fill = 0]
+                  0000c58e    0000000f     main.obj (.const:.string:h5x7_08)
+                  0000c59d    00000001     --HOLE-- [fill = 0]
+                  0000c59e    0000000d     main.obj (.const:.string:h5x7_04)
+                  0000c5ab    00000001     --HOLE-- [fill = 0]
+                  0000c5ac    0000000b     main.obj (.const:.string:h5x7_05)
+                  0000c5b7    00000001     --HOLE-- [fill = 0]
+                  0000c5b8    00000009     main.obj (.const:.string:h5x7_18)
+                  0000c5c1    00000001     --HOLE-- [fill = 0]
+                  0000c5c2    00000009     main.obj (.const:.string:h5x7_19)
+                  0000c5cb    00000001     --HOLE-- [fill = 0]
+                  0000c5cc    00000008     main.obj (.const:.string:h5x7_02)
+                  0000c5d4    00000008     main.obj (.const:.string:h5x7_07)
+                  0000c5dc    00000008     main.obj (.const:.string:h5x7_09)
+                  0000c5e4    00000008     main.obj (.const:.string:h5x7_10)
+                  0000c5ec    00000008     main.obj (.const:.string:h5x7_11)
+                  0000c5f4    00000008     main.obj (.const:.string:h5x7_12)
+                  0000c5fc    00000006     main.obj (.const:.string:h5x7_00)
+                  0000c602    00000006     main.obj (.const:.string:h5x7_01)
+                  0000c608    00000006     main.obj (.const:.string:h5x7_100)
+                  0000c60e    00000006     main.obj (.const:.string:h5x7_101)
+                  0000c614    00000006     main.obj (.const:.string:h5x7_102)
+                  0000c61a    00000006     main.obj (.const:.string:h5x7_103)
+                  0000c620    00000006     main.obj (.const:.string:h5x7_104)
+                  0000c626    00000006     main.obj (.const:.string:h5x7_105)
+                  0000c62c    00000006     main.obj (.const:.string:h5x7_106)
+                  0000c632    00000006     main.obj (.const:.string:h5x7_107)
+                  0000c638    00000006     main.obj (.const:.string:h5x7_108)
+                  0000c63e    00000006     main.obj (.const:.string:h5x7_109)
+                  0000c644    00000006     main.obj (.const:.string:h5x7_110)
+                  0000c64a    00000006     main.obj (.const:.string:h5x7_111)
+                  0000c650    00000006     main.obj (.const:.string:h5x7_112)
+                  0000c656    00000006     main.obj (.const:.string:h5x7_113)
+                  0000c65c    00000006     main.obj (.const:.string:h5x7_114)
+                  0000c662    00000006     main.obj (.const:.string:h5x7_115)
+                  0000c668    00000006     main.obj (.const:.string:h5x7_116)
+                  0000c66e    00000006     main.obj (.const:.string:h5x7_117)
+                  0000c674    00000006     main.obj (.const:.string:h5x7_118)
+                  0000c67a    00000006     main.obj (.const:.string:h5x7_119)
+                  0000c680    00000006     main.obj (.const:.string:h5x7_120)
+                  0000c686    00000006     main.obj (.const:.string:h5x7_121)
+                  0000c68c    00000006     main.obj (.const:.string:h5x7_122)
+                  0000c692    00000006     main.obj (.const:.string:h5x7_123)
+                  0000c698    00000006     main.obj (.const:.string:h5x7_124)
+                  0000c69e    00000006     main.obj (.const:.string:h5x7_125)
+                  0000c6a4    00000006     main.obj (.const:.string:h5x7_126)
+                  0000c6aa    00000006     main.obj (.const:.string:h5x7_127)
+                  0000c6b0    00000006     main.obj (.const:.string:h5x7_128)
+                  0000c6b6    00000006     main.obj (.const:.string:h5x7_129)
+                  0000c6bc    00000006     main.obj (.const:.string:h5x7_130)
+                  0000c6c2    00000006     main.obj (.const:.string:h5x7_131)
+                  0000c6c8    00000006     main.obj (.const:.string:h5x7_132)
+                  0000c6ce    00000006     main.obj (.const:.string:h5x7_133)
+                  0000c6d4    00000006     main.obj (.const:.string:h5x7_134)
+                  0000c6da    00000006     main.obj (.const:.string:h5x7_135)
+                  0000c6e0    00000006     main.obj (.const:.string:h5x7_136)
+                  0000c6e6    00000006     main.obj (.const:.string:h5x7_137)
+                  0000c6ec    00000006     main.obj (.const:.string:h5x7_138)
+                  0000c6f2    00000006     main.obj (.const:.string:h5x7_139)
+                  0000c6f8    00000006     main.obj (.const:.string:h5x7_140)
+                  0000c6fe    00000006     main.obj (.const:.string:h5x7_141)
+                  0000c704    00000006     main.obj (.const:.string:h5x7_142)
+                  0000c70a    00000006     main.obj (.const:.string:h5x7_143)
+                  0000c710    00000006     main.obj (.const:.string:h5x7_144)
+                  0000c716    00000006     main.obj (.const:.string:h5x7_145)
+                  0000c71c    00000006     main.obj (.const:.string:h5x7_146)
+                  0000c722    00000006     main.obj (.const:.string:h5x7_147)
+                  0000c728    00000006     main.obj (.const:.string:h5x7_148)
+                  0000c72e    00000006     main.obj (.const:.string:h5x7_149)
+                  0000c734    00000006     main.obj (.const:.string:h5x7_150)
+                  0000c73a    00000006     main.obj (.const:.string:h5x7_151)
+                  0000c740    00000006     main.obj (.const:.string:h5x7_152)
+                  0000c746    00000006     main.obj (.const:.string:h5x7_153)
+                  0000c74c    00000006     main.obj (.const:.string:h5x7_154)
+                  0000c752    00000006     main.obj (.const:.string:h5x7_155)
+                  0000c758    00000006     main.obj (.const:.string:h5x7_156)
+                  0000c75e    00000006     main.obj (.const:.string:h5x7_157)
+                  0000c764    00000006     main.obj (.const:.string:h5x7_158)
+                  0000c76a    00000006     main.obj (.const:.string:h5x7_159)
+                  0000c770    00000006     main.obj (.const:.string:h5x7_160)
+                  0000c776    00000006     main.obj (.const:.string:h5x7_161)
+                  0000c77c    00000006     main.obj (.const:.string:h5x7_162)
+                  0000c782    00000006     main.obj (.const:.string:h5x7_163)
+                  0000c788    00000006     main.obj (.const:.string:h5x7_164)
+                  0000c78e    00000006     main.obj (.const:.string:h5x7_165)
+                  0000c794    00000006     main.obj (.const:.string:h5x7_166)
+                  0000c79a    00000006     main.obj (.const:.string:h5x7_167)
+                  0000c7a0    00000006     main.obj (.const:.string:h5x7_168)
+                  0000c7a6    00000006     main.obj (.const:.string:h5x7_169)
+                  0000c7ac    00000006     main.obj (.const:.string:h5x7_170)
+                  0000c7b2    00000006     main.obj (.const:.string:h5x7_171)
+                  0000c7b8    00000006     main.obj (.const:.string:h5x7_172)
+                  0000c7be    00000006     main.obj (.const:.string:h5x7_173)
+                  0000c7c4    00000006     main.obj (.const:.string:h5x7_174)
+                  0000c7ca    00000006     main.obj (.const:.string:h5x7_175)
+                  0000c7d0    00000006     main.obj (.const:.string:h5x7_176)
+                  0000c7d6    00000006     main.obj (.const:.string:h5x7_177)
+                  0000c7dc    00000006     main.obj (.const:.string:h5x7_178)
+                  0000c7e2    00000006     main.obj (.const:.string:h5x7_179)
+                  0000c7e8    00000006     main.obj (.const:.string:h5x7_180)
+                  0000c7ee    00000006     main.obj (.const:.string:h5x7_181)
+                  0000c7f4    00000006     main.obj (.const:.string:h5x7_182)
+                  0000c7fa    00000006     main.obj (.const:.string:h5x7_183)
+                  0000c800    00000006     main.obj (.const:.string:h5x7_184)
+                  0000c806    00000006     main.obj (.const:.string:h5x7_185)
+                  0000c80c    00000006     main.obj (.const:.string:h5x7_186)
+                  0000c812    00000006     main.obj (.const:.string:h5x7_187)
+                  0000c818    00000006     main.obj (.const:.string:h5x7_188)
+                  0000c81e    00000006     main.obj (.const:.string:h5x7_189)
+                  0000c824    00000006     main.obj (.const:.string:h5x7_190)
+                  0000c82a    00000006     main.obj (.const:.string:h5x7_191)
+                  0000c830    00000006     main.obj (.const:.string:h5x7_192)
+                  0000c836    00000006     main.obj (.const:.string:h5x7_193)
+                  0000c83c    00000006     main.obj (.const:.string:h5x7_194)
+                  0000c842    00000006     main.obj (.const:.string:h5x7_195)
+                  0000c848    00000006     main.obj (.const:.string:h5x7_196)
+                  0000c84e    00000006     main.obj (.const:.string:h5x7_197)
+                  0000c854    00000006     main.obj (.const:.string:h5x7_198)
+                  0000c85a    00000006     main.obj (.const:.string:h5x7_199)
+                  0000c860    00000006     main.obj (.const:.string:h5x7_200)
+                  0000c866    00000006     main.obj (.const:.string:h5x7_201)
+                  0000c86c    00000006     main.obj (.const:.string:h5x7_202)
+                  0000c872    00000006     main.obj (.const:.string:h5x7_203)
+                  0000c878    00000006     main.obj (.const:.string:h5x7_204)
+                  0000c87e    00000006     main.obj (.const:.string:h5x7_205)
+                  0000c884    00000006     main.obj (.const:.string:h5x7_206)
+                  0000c88a    00000006     main.obj (.const:.string:h5x7_207)
+                  0000c890    00000006     main.obj (.const:.string:h5x7_208)
+                  0000c896    00000006     main.obj (.const:.string:h5x7_209)
+                  0000c89c    00000006     main.obj (.const:.string:h5x7_210)
+                  0000c8a2    00000006     main.obj (.const:.string:h5x7_211)
+                  0000c8a8    00000006     main.obj (.const:.string:h5x7_212)
+                  0000c8ae    00000006     main.obj (.const:.string:h5x7_213)
+                  0000c8b4    00000006     main.obj (.const:.string:h5x7_214)
+                  0000c8ba    00000006     main.obj (.const:.string:h5x7_215)
+                  0000c8c0    00000006     main.obj (.const:.string:h5x7_216)
+                  0000c8c6    00000006     main.obj (.const:.string:h5x7_217)
+                  0000c8cc    00000006     main.obj (.const:.string:h5x7_218)
+                  0000c8d2    00000006     main.obj (.const:.string:h5x7_219)
+                  0000c8d8    00000006     main.obj (.const:.string:h5x7_220)
+                  0000c8de    00000006     main.obj (.const:.string:h5x7_221)
+                  0000c8e4    00000006     main.obj (.const:.string:h5x7_222)
+                  0000c8ea    00000006     main.obj (.const:.string:h5x7_223)
+                  0000c8f0    00000006     main.obj (.const:.string:h5x7_224)
+                  0000c8f6    00000006     main.obj (.const:.string:h5x7_225)
+                  0000c8fc    00000006     main.obj (.const:.string:h5x7_226)
+                  0000c902    00000006     main.obj (.const:.string:h5x7_227)
+                  0000c908    00000006     main.obj (.const:.string:h5x7_228)
+                  0000c90e    00000006     main.obj (.const:.string:h5x7_229)
+                  0000c914    00000006     main.obj (.const:.string:h5x7_230)
+                  0000c91a    00000006     main.obj (.const:.string:h5x7_231)
+                  0000c920    00000006     main.obj (.const:.string:h5x7_232)
+                  0000c926    00000006     main.obj (.const:.string:h5x7_233)
+                  0000c92c    00000006     main.obj (.const:.string:h5x7_234)
+                  0000c932    00000006     main.obj (.const:.string:h5x7_235)
+                  0000c938    00000006     main.obj (.const:.string:h5x7_236)
+                  0000c93e    00000006     main.obj (.const:.string:h5x7_237)
+                  0000c944    00000006     main.obj (.const:.string:h5x7_238)
+                  0000c94a    00000006     main.obj (.const:.string:h5x7_239)
+                  0000c950    00000006     main.obj (.const:.string:h5x7_23)
+                  0000c956    00000006     main.obj (.const:.string:h5x7_240)
+                  0000c95c    00000006     main.obj (.const:.string:h5x7_241)
+                  0000c962    00000006     main.obj (.const:.string:h5x7_242)
+                  0000c968    00000006     main.obj (.const:.string:h5x7_243)
+                  0000c96e    00000006     main.obj (.const:.string:h5x7_244)
+                  0000c974    00000006     main.obj (.const:.string:h5x7_245)
+                  0000c97a    00000006     main.obj (.const:.string:h5x7_246)
+                  0000c980    00000006     main.obj (.const:.string:h5x7_247)
+                  0000c986    00000006     main.obj (.const:.string:h5x7_248)
+                  0000c98c    00000006     main.obj (.const:.string:h5x7_249)
+                  0000c992    00000006     main.obj (.const:.string:h5x7_24)
+                  0000c998    00000006     main.obj (.const:.string:h5x7_250)
+                  0000c99e    00000006     main.obj (.const:.string:h5x7_251)
+                  0000c9a4    00000006     main.obj (.const:.string:h5x7_252)
+                  0000c9aa    00000006     main.obj (.const:.string:h5x7_253)
+                  0000c9b0    00000006     main.obj (.const:.string:h5x7_254)
+                  0000c9b6    00000006     main.obj (.const:.string:h5x7_255)
+                  0000c9bc    00000006     main.obj (.const:.string:h5x7_25)
+                  0000c9c2    00000006     main.obj (.const:.string:h5x7_26)
+                  0000c9c8    00000006     main.obj (.const:.string:h5x7_27)
+                  0000c9ce    00000006     main.obj (.const:.string:h5x7_28)
+                  0000c9d4    00000006     main.obj (.const:.string:h5x7_29)
+                  0000c9da    00000006     main.obj (.const:.string:h5x7_30)
+                  0000c9e0    00000006     main.obj (.const:.string:h5x7_31)
+                  0000c9e6    00000006     main.obj (.const:.string:h5x7_32)
+                  0000c9ec    00000006     main.obj (.const:.string:h5x7_33)
+                  0000c9f2    00000006     main.obj (.const:.string:h5x7_34)
+                  0000c9f8    00000006     main.obj (.const:.string:h5x7_35)
+                  0000c9fe    00000006     main.obj (.const:.string:h5x7_36)
+                  0000ca04    00000006     main.obj (.const:.string:h5x7_37)
+                  0000ca0a    00000006     main.obj (.const:.string:h5x7_38)
+                  0000ca10    00000006     main.obj (.const:.string:h5x7_39)
+                  0000ca16    00000006     main.obj (.const:.string:h5x7_40)
+                  0000ca1c    00000006     main.obj (.const:.string:h5x7_41)
+                  0000ca22    00000006     main.obj (.const:.string:h5x7_42)
+                  0000ca28    00000006     main.obj (.const:.string:h5x7_43)
+                  0000ca2e    00000006     main.obj (.const:.string:h5x7_44)
+                  0000ca34    00000006     main.obj (.const:.string:h5x7_45)
+                  0000ca3a    00000006     main.obj (.const:.string:h5x7_46)
+                  0000ca40    00000006     main.obj (.const:.string:h5x7_47)
+                  0000ca46    00000006     main.obj (.const:.string:h5x7_48)
+                  0000ca4c    00000006     main.obj (.const:.string:h5x7_49)
+                  0000ca52    00000006     main.obj (.const:.string:h5x7_50)
+                  0000ca58    00000006     main.obj (.const:.string:h5x7_51)
+                  0000ca5e    00000006     main.obj (.const:.string:h5x7_52)
+                  0000ca64    00000006     main.obj (.const:.string:h5x7_53)
+                  0000ca6a    00000006     main.obj (.const:.string:h5x7_54)
+                  0000ca70    00000006     main.obj (.const:.string:h5x7_55)
+                  0000ca76    00000006     main.obj (.const:.string:h5x7_56)
+                  0000ca7c    00000006     main.obj (.const:.string:h5x7_57)
+                  0000ca82    00000006     main.obj (.const:.string:h5x7_58)
+                  0000ca88    00000006     main.obj (.const:.string:h5x7_59)
+                  0000ca8e    00000006     main.obj (.const:.string:h5x7_60)
+                  0000ca94    00000006     main.obj (.const:.string:h5x7_61)
+                  0000ca9a    00000006     main.obj (.const:.string:h5x7_62)
+                  0000caa0    00000006     main.obj (.const:.string:h5x7_63)
+                  0000caa6    00000006     main.obj (.const:.string:h5x7_64)
+                  0000caac    00000006     main.obj (.const:.string:h5x7_65)
+                  0000cab2    00000006     main.obj (.const:.string:h5x7_66)
+                  0000cab8    00000006     main.obj (.const:.string:h5x7_67)
+                  0000cabe    00000006     main.obj (.const:.string:h5x7_68)
+                  0000cac4    00000006     main.obj (.const:.string:h5x7_69)
+                  0000caca    00000006     main.obj (.const:.string:h5x7_70)
+                  0000cad0    00000006     main.obj (.const:.string:h5x7_71)
+                  0000cad6    00000006     main.obj (.const:.string:h5x7_72)
+                  0000cadc    00000006     main.obj (.const:.string:h5x7_73)
+                  0000cae2    00000006     main.obj (.const:.string:h5x7_74)
+                  0000cae8    00000006     main.obj (.const:.string:h5x7_75)
+                  0000caee    00000006     main.obj (.const:.string:h5x7_76)
+                  0000caf4    00000006     main.obj (.const:.string:h5x7_77)
+                  0000cafa    00000006     main.obj (.const:.string:h5x7_78)
+                  0000cb00    00000006     main.obj (.const:.string:h5x7_79)
+                  0000cb06    00000006     main.obj (.const:.string:h5x7_80)
+                  0000cb0c    00000006     main.obj (.const:.string:h5x7_81)
+                  0000cb12    00000006     main.obj (.const:.string:h5x7_82)
+                  0000cb18    00000006     main.obj (.const:.string:h5x7_83)
+                  0000cb1e    00000006     main.obj (.const:.string:h5x7_84)
+                  0000cb24    00000006     main.obj (.const:.string:h5x7_85)
+                  0000cb2a    00000006     main.obj (.const:.string:h5x7_86)
+                  0000cb30    00000006     main.obj (.const:.string:h5x7_87)
+                  0000cb36    00000006     main.obj (.const:.string:h5x7_88)
+                  0000cb3c    00000006     main.obj (.const:.string:h5x7_89)
+                  0000cb42    00000006     main.obj (.const:.string:h5x7_90)
+                  0000cb48    00000006     main.obj (.const:.string:h5x7_91)
+                  0000cb4e    00000006     main.obj (.const:.string:h5x7_92)
+                  0000cb54    00000006     main.obj (.const:.string:h5x7_93)
+                  0000cb5a    00000006     main.obj (.const:.string:h5x7_94)
+                  0000cb60    00000006     main.obj (.const:.string:h5x7_95)
+                  0000cb66    00000006     main.obj (.const:.string:h5x7_96)
+                  0000cb6c    00000006     main.obj (.const:.string:h5x7_97)
+                  0000cb72    00000006     main.obj (.const:.string:h5x7_98)
+                  0000cb78    00000006     main.obj (.const:.string:h5x7_99)
 
-.const     0    0000c4b2    00000280     
-                  0000c4b2    00000280     main.obj (.const:.string:Testbmp)
+.text      0    0000cb7e    000005f6     
+                  0000cb7e    000000bc     nt75451.obj (.text:PutChar)
+                  0000cc3a    000000b0     main.obj (.text:main)
+                  0000ccea    00000084     nt75451.obj (.text:WriteFSGraphic)
+                  0000cd6e    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0000cdea    00000078     nt75451.obj (.text:ClearDisplay)
+                  0000ce62    00000060     nt75451.obj (.text:InitDisplay)
+                  0000cec2    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
+                  0000cf0e    00000048     nt75451.obj (.text:putPixels)
+                  0000cf56    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0000cf98    0000003a     nt75451.obj (.text:sendSPI)
+                  0000cfd2    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
+                  0000cffe    0000002c                     : lsl16.asm.obj (.text)
+                  0000d02a    00000026     nt75451.obj (.text:setColumnAddress)
+                  0000d050    00000024     nt75451.obj (.text:InitDriver)
+                  0000d074    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
+                  0000d090    0000001a     main.obj (.text:watchdog_timer)
+                  0000d0aa    00000016     gfxEmbedLib.obj (.text:Init_gfx)
+                  0000d0c0    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000d0d4    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000d0e6    00000012                     : memcpy.c.obj (.text:memcpy)
+                  0000d0f8    00000012     nt75451.obj (.text:sendSPICmd)
+                  0000d10a    00000012     nt75451.obj (.text:sendSPIData)
+                  0000d11c    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
+                  0000d12c    00000010     nt75451.obj (.text:setPageAddress)
+                  0000d13c    0000000e     timer.obj (.text:Delay)
+                  0000d14a    0000000a     timer.obj (.text:CallInISR)
+                  0000d154    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000d15c    00000006     timer.obj (.text:InitTimerSystem)
+                  0000d162    00000006     nt75451.obj (.text:SetFont)
+                  0000d168    00000006     rts430_eabi.lib : exit.c.obj (.text:abort)
+                  0000d16e    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+                  0000d172    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.cinit     0    0000c732    0000001a     
-                  0000c732    00000007     (.cinit..data.load) [load image, compression = lzss]
-                  0000c739    00000001     --HOLE-- [fill = 0]
-                  0000c73a    00000006     (__TI_handler_table)
-                  0000c740    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000c744    00000008     (__TI_cinit_table)
+.cinit     0    0000d174    0000001a     
+                  0000d174    00000007     (.cinit..data.load) [load image, compression = lzss]
+                  0000d17b    00000001     --HOLE-- [fill = 0]
+                  0000d17c    00000006     (__TI_handler_table)
+                  0000d182    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000d186    00000008     (__TI_cinit_table)
 
 .binit     0    0000c000    00000000     
 
@@ -158,10 +428,10 @@ MODULE SUMMARY
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     98     642       2      
+       main.obj                     202    2937      2      
        timer.obj                    30     0         2      
     +--+----------------------------+------+---------+---------+
-       Total:                       128    642       4      
+       Total:                       232    2937      4      
                                                             
     .\gfxEmbedLib\
        gfxEmbedLib.obj              22     0         0      
@@ -169,9 +439,9 @@ MODULE SUMMARY
        Total:                       22     0         0      
                                                             
     .\gfxEmbedLib\Drivers\
-       nt75451.obj                  578    0         6      
+       nt75451.obj                  798    0         13     
     +--+----------------------------+------+---------+---------+
-       Total:                       578    0         6      
+       Total:                       798    0         13     
                                                             
     C:\ti\ccs2010\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430_eabi.lib
        copy_decompress_lzss.c.obj   124    0         0      
@@ -206,19 +476,19 @@ MODULE SUMMARY
        Stack:                       0      0         80     
        Linker Generated:            0      25        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 1202   693       90     
+       Grand Total:                 1526   2988      97     
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000c744 records: 2, size/record: 4, table size: 8
-	.data: load addr=0000c732, load size=00000007 bytes, run addr=00000200, run size=00000006 bytes, compression=lzss
-	.bss: load addr=0000c740, load size=00000004 bytes, run addr=00000206, run size=00000004 bytes, compression=zero_init
+__TI_cinit_table @ 0000d186 records: 2, size/record: 4, table size: 8
+	.data: load addr=0000d174, load size=00000007 bytes, run addr=00000200, run size=00000009 bytes, compression=lzss
+	.bss: load addr=0000d182, load size=00000004 bytes, run addr=0000020a, run size=00000008 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000c73a records: 3, size/record: 2, table size: 6
+__TI_handler_table @ 0000d17c records: 3, size/record: 2, table size: 6
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -238,7 +508,8 @@ address   name
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
 00000053  BCSCTL3                       
-0000c4a6  C$$EXIT                       
+00000208  BaselineShift                 
+0000d168  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 000010fb  CALBC1_12MHZ                  
@@ -250,21 +521,23 @@ address   name
 000010fe  CALDCO_1MHZ                   
 000010fc  CALDCO_8MHZ                   
 0000005b  CAPD                          
-0000c48e  CallInISR                     
-0000c0a0  ClearDisplay                  
+0000d14a  CallInISR                     
+0000cdea  ClearDisplay                  
 00000056  DCOCTL                        
-0000c472  Delay                         
+0000d13c  Delay                         
 00000128  FCTL1                         
 0000012a  FCTL2                         
 0000012c  FCTL3                         
+0000c280  Hitachi                       
 00000000  IE1                           
 00000001  IE2                           
 00000002  IFG1                          
 00000003  IFG2                          
-0000c1b0  InitDisplay                   
-0000c378  InitDriver                    
-0000c4a0  InitTimerSystem               
-0000c3f0  Init_gfx                      
+0000ce62  InitDisplay                   
+0000d050  InitDriver                    
+0000d15c  InitTimerSystem               
+0000d0aa  Init_gfx                      
+00000210  Inverted                      
 00000022  P1DIR                         
 00000025  P1IE                          
 00000024  P1IES                         
@@ -289,7 +562,11 @@ address   name
 00000010  P3REN                         
 0000001b  P3SEL                         
 00000043  P3SEL2                        
-0000c000  Put_graphic                   
+0000cb7e  PutChar                       
+0000cb7e  Put_Char                      
+0000ccea  Put_graphic                   
+0000d162  SetFont                       
+0000d162  Set_Font                      
 00000172  TA0CCR0                       
 00000174  TA0CCR1                       
 00000176  TA0CCR2                       
@@ -308,14 +585,14 @@ address   name
 00000180  TA1CTL                        
 0000011e  TA1IV                         
 00000190  TA1R                          
-00000206  TIMERCOUNT                    
-00000208  TIME_MEASURE                  
+0000020a  TIMERCOUNT                    
+0000020c  TIME_MEASURE                  
 000010db  TLV_ADC10_1_LEN               
 000010da  TLV_ADC10_1_TAG               
 000010c0  TLV_CHECKSUM                  
 000010f7  TLV_DCO_30_LEN                
 000010f6  TLV_DCO_30_TAG                
-0000c4b2  Testbmp                       
+0000c000  Testbmp                       
 0000005d  UCA0ABCTL                     
 00000062  UCA0BR0                       
 00000063  UCA0BR1                       
@@ -338,18 +615,18 @@ address   name
 0000006d  UCB0STAT                      
 0000006f  UCB0TXBUF                     
 00000120  WDTCTL                        
-0000c000  WriteFSGraphic                
+0000ccea  WriteFSGraphic                
 00000400  __STACK_END                   
 00000050  __STACK_SIZE                  
-0000c744  __TI_CINIT_Base               
-0000c74c  __TI_CINIT_Limit              
-0000c74c  __TI_CINIT_Warm               
-0000c73a  __TI_Handler_Table_Base       
-0000c740  __TI_Handler_Table_Limit      
-0000c498  __TI_ISR_TRAP                 
-0000c2a4  __TI_auto_init_nobinit_nopinit
-0000c134  __TI_decompress_lzss          
-0000c41a  __TI_decompress_none          
+0000d186  __TI_CINIT_Base               
+0000d18e  __TI_CINIT_Limit              
+0000d18e  __TI_CINIT_Warm               
+0000d17c  __TI_Handler_Table_Base       
+0000d182  __TI_Handler_Table_Limit      
+0000d154  __TI_ISR_TRAP                 
+0000cf56  __TI_auto_init_nobinit_nopinit
+0000cd6e  __TI_decompress_lzss          
+0000d0d4  __TI_decompress_none          
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -366,81 +643,342 @@ address   name
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
-0000c406  __TI_zero_init_nomemset       
+0000d0c0  __TI_zero_init_nomemset       
 ffffffff  __c_args__                    
-0000c46e  __mspabi_func_epilog_1        
-0000c46c  __mspabi_func_epilog_2        
-0000c46a  __mspabi_func_epilog_3        
-0000c468  __mspabi_func_epilog_4        
-0000c466  __mspabi_func_epilog_5        
-0000c464  __mspabi_func_epilog_6        
-0000c462  __mspabi_func_epilog_7        
-0000c34c  __mspabi_slli                 
-0000c374  __mspabi_slli_1               
-0000c362  __mspabi_slli_10              
-0000c360  __mspabi_slli_11              
-0000c35e  __mspabi_slli_12              
-0000c35c  __mspabi_slli_13              
-0000c35a  __mspabi_slli_14              
-0000c358  __mspabi_slli_15              
-0000c372  __mspabi_slli_2               
-0000c370  __mspabi_slli_3               
-0000c36e  __mspabi_slli_4               
-0000c36c  __mspabi_slli_5               
-0000c36a  __mspabi_slli_6               
-0000c368  __mspabi_slli_7               
-0000c366  __mspabi_slli_8               
-0000c364  __mspabi_slli_9               
-0000c320  __mspabi_srai                 
-0000c348  __mspabi_srai_1               
-0000c336  __mspabi_srai_10              
-0000c334  __mspabi_srai_11              
-0000c332  __mspabi_srai_12              
-0000c330  __mspabi_srai_13              
-0000c32e  __mspabi_srai_14              
-0000c32c  __mspabi_srai_15              
-0000c346  __mspabi_srai_2               
-0000c344  __mspabi_srai_3               
-0000c342  __mspabi_srai_4               
-0000c340  __mspabi_srai_5               
-0000c33e  __mspabi_srai_6               
-0000c33c  __mspabi_srai_7               
-0000c33a  __mspabi_srai_8               
-0000c338  __mspabi_srai_9               
-0000c210  __mspabi_srli                 
-0000c256  __mspabi_srli_1               
-0000c232  __mspabi_srli_10              
-0000c22e  __mspabi_srli_11              
-0000c22a  __mspabi_srli_12              
-0000c226  __mspabi_srli_13              
-0000c222  __mspabi_srli_14              
-0000c21e  __mspabi_srli_15              
-0000c252  __mspabi_srli_2               
-0000c24e  __mspabi_srli_3               
-0000c24a  __mspabi_srli_4               
-0000c246  __mspabi_srli_5               
-0000c242  __mspabi_srli_6               
-0000c23e  __mspabi_srli_7               
-0000c23a  __mspabi_srli_8               
-0000c236  __mspabi_srli_9               
-0000c3ba  _c_int00_noargs               
+0000d128  __mspabi_func_epilog_1        
+0000d126  __mspabi_func_epilog_2        
+0000d124  __mspabi_func_epilog_3        
+0000d122  __mspabi_func_epilog_4        
+0000d120  __mspabi_func_epilog_5        
+0000d11e  __mspabi_func_epilog_6        
+0000d11c  __mspabi_func_epilog_7        
+0000cffe  __mspabi_slli                 
+0000d026  __mspabi_slli_1               
+0000d014  __mspabi_slli_10              
+0000d012  __mspabi_slli_11              
+0000d010  __mspabi_slli_12              
+0000d00e  __mspabi_slli_13              
+0000d00c  __mspabi_slli_14              
+0000d00a  __mspabi_slli_15              
+0000d024  __mspabi_slli_2               
+0000d022  __mspabi_slli_3               
+0000d020  __mspabi_slli_4               
+0000d01e  __mspabi_slli_5               
+0000d01c  __mspabi_slli_6               
+0000d01a  __mspabi_slli_7               
+0000d018  __mspabi_slli_8               
+0000d016  __mspabi_slli_9               
+0000cfd2  __mspabi_srai                 
+0000cffa  __mspabi_srai_1               
+0000cfe8  __mspabi_srai_10              
+0000cfe6  __mspabi_srai_11              
+0000cfe4  __mspabi_srai_12              
+0000cfe2  __mspabi_srai_13              
+0000cfe0  __mspabi_srai_14              
+0000cfde  __mspabi_srai_15              
+0000cff8  __mspabi_srai_2               
+0000cff6  __mspabi_srai_3               
+0000cff4  __mspabi_srai_4               
+0000cff2  __mspabi_srai_5               
+0000cff0  __mspabi_srai_6               
+0000cfee  __mspabi_srai_7               
+0000cfec  __mspabi_srai_8               
+0000cfea  __mspabi_srai_9               
+0000cec2  __mspabi_srli                 
+0000cf08  __mspabi_srli_1               
+0000cee4  __mspabi_srli_10              
+0000cee0  __mspabi_srli_11              
+0000cedc  __mspabi_srli_12              
+0000ced8  __mspabi_srli_13              
+0000ced4  __mspabi_srli_14              
+0000ced0  __mspabi_srli_15              
+0000cf04  __mspabi_srli_2               
+0000cf00  __mspabi_srli_3               
+0000cefc  __mspabi_srli_4               
+0000cef8  __mspabi_srli_5               
+0000cef4  __mspabi_srli_6               
+0000cef0  __mspabi_srli_7               
+0000ceec  __mspabi_srli_8               
+0000cee8  __mspabi_srli_9               
+0000d074  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000003b0  _stack                        
-0000c4b0  _system_post_cinit            
-0000c4ac  _system_pre_init              
-0000c4a6  abort                         
+0000d172  _system_post_cinit            
+0000d16e  _system_pre_init              
+0000d168  abort                         
 00000200  column                        
+00000206  debug_var                     
+00000207  debug_var_2                   
 00000202  display_x_size                
 00000204  display_y_size                
-0000c25c  main                          
-0000c42c  memcpy                        
+0000020e  font_data_ptr                 
+0000c5fc  h5x7_00                       
+0000c602  h5x7_01                       
+0000c5cc  h5x7_02                       
+0000c566  h5x7_03                       
+0000c59e  h5x7_04                       
+0000c5ac  h5x7_05                       
+0000c552  h5x7_06                       
+0000c5d4  h5x7_07                       
+0000c58e  h5x7_08                       
+0000c5dc  h5x7_09                       
+0000c5e4  h5x7_10                       
+0000c608  h5x7_100                      
+0000c60e  h5x7_101                      
+0000c614  h5x7_102                      
+0000c61a  h5x7_103                      
+0000c620  h5x7_104                      
+0000c626  h5x7_105                      
+0000c62c  h5x7_106                      
+0000c632  h5x7_107                      
+0000c638  h5x7_108                      
+0000c63e  h5x7_109                      
+0000c5ec  h5x7_11                       
+0000c644  h5x7_110                      
+0000c64a  h5x7_111                      
+0000c650  h5x7_112                      
+0000c656  h5x7_113                      
+0000c65c  h5x7_114                      
+0000c662  h5x7_115                      
+0000c668  h5x7_116                      
+0000c66e  h5x7_117                      
+0000c674  h5x7_118                      
+0000c67a  h5x7_119                      
+0000c5f4  h5x7_12                       
+0000c680  h5x7_120                      
+0000c686  h5x7_121                      
+0000c68c  h5x7_122                      
+0000c692  h5x7_123                      
+0000c698  h5x7_124                      
+0000c69e  h5x7_125                      
+0000c6a4  h5x7_126                      
+0000c6aa  h5x7_127                      
+0000c6b0  h5x7_128                      
+0000c6b6  h5x7_129                      
+0000c57a  h5x7_13                       
+0000c6bc  h5x7_130                      
+0000c6c2  h5x7_131                      
+0000c6c8  h5x7_132                      
+0000c6ce  h5x7_133                      
+0000c6d4  h5x7_134                      
+0000c6da  h5x7_135                      
+0000c6e0  h5x7_136                      
+0000c6e6  h5x7_137                      
+0000c6ec  h5x7_138                      
+0000c6f2  h5x7_139                      
+0000c480  h5x7_14                       
+0000c6f8  h5x7_140                      
+0000c6fe  h5x7_141                      
+0000c704  h5x7_142                      
+0000c70a  h5x7_143                      
+0000c710  h5x7_144                      
+0000c716  h5x7_145                      
+0000c71c  h5x7_146                      
+0000c722  h5x7_147                      
+0000c728  h5x7_148                      
+0000c72e  h5x7_149                      
+0000c49e  h5x7_15                       
+0000c734  h5x7_150                      
+0000c73a  h5x7_151                      
+0000c740  h5x7_152                      
+0000c746  h5x7_153                      
+0000c74c  h5x7_154                      
+0000c752  h5x7_155                      
+0000c758  h5x7_156                      
+0000c75e  h5x7_157                      
+0000c764  h5x7_158                      
+0000c76a  h5x7_159                      
+0000c4bc  h5x7_16                       
+0000c770  h5x7_160                      
+0000c776  h5x7_161                      
+0000c77c  h5x7_162                      
+0000c782  h5x7_163                      
+0000c788  h5x7_164                      
+0000c78e  h5x7_165                      
+0000c794  h5x7_166                      
+0000c79a  h5x7_167                      
+0000c7a0  h5x7_168                      
+0000c7a6  h5x7_169                      
+0000c4da  h5x7_17                       
+0000c7ac  h5x7_170                      
+0000c7b2  h5x7_171                      
+0000c7b8  h5x7_172                      
+0000c7be  h5x7_173                      
+0000c7c4  h5x7_174                      
+0000c7ca  h5x7_175                      
+0000c7d0  h5x7_176                      
+0000c7d6  h5x7_177                      
+0000c7dc  h5x7_178                      
+0000c7e2  h5x7_179                      
+0000c5b8  h5x7_18                       
+0000c7e8  h5x7_180                      
+0000c7ee  h5x7_181                      
+0000c7f4  h5x7_182                      
+0000c7fa  h5x7_183                      
+0000c800  h5x7_184                      
+0000c806  h5x7_185                      
+0000c80c  h5x7_186                      
+0000c812  h5x7_187                      
+0000c818  h5x7_188                      
+0000c81e  h5x7_189                      
+0000c5c2  h5x7_19                       
+0000c824  h5x7_190                      
+0000c82a  h5x7_191                      
+0000c830  h5x7_192                      
+0000c836  h5x7_193                      
+0000c83c  h5x7_194                      
+0000c842  h5x7_195                      
+0000c848  h5x7_196                      
+0000c84e  h5x7_197                      
+0000c854  h5x7_198                      
+0000c85a  h5x7_199                      
+0000c4f8  h5x7_20                       
+0000c860  h5x7_200                      
+0000c866  h5x7_201                      
+0000c86c  h5x7_202                      
+0000c872  h5x7_203                      
+0000c878  h5x7_204                      
+0000c87e  h5x7_205                      
+0000c884  h5x7_206                      
+0000c88a  h5x7_207                      
+0000c890  h5x7_208                      
+0000c896  h5x7_209                      
+0000c516  h5x7_21                       
+0000c89c  h5x7_210                      
+0000c8a2  h5x7_211                      
+0000c8a8  h5x7_212                      
+0000c8ae  h5x7_213                      
+0000c8b4  h5x7_214                      
+0000c8ba  h5x7_215                      
+0000c8c0  h5x7_216                      
+0000c8c6  h5x7_217                      
+0000c8cc  h5x7_218                      
+0000c8d2  h5x7_219                      
+0000c534  h5x7_22                       
+0000c8d8  h5x7_220                      
+0000c8de  h5x7_221                      
+0000c8e4  h5x7_222                      
+0000c8ea  h5x7_223                      
+0000c8f0  h5x7_224                      
+0000c8f6  h5x7_225                      
+0000c8fc  h5x7_226                      
+0000c902  h5x7_227                      
+0000c908  h5x7_228                      
+0000c90e  h5x7_229                      
+0000c950  h5x7_23                       
+0000c914  h5x7_230                      
+0000c91a  h5x7_231                      
+0000c920  h5x7_232                      
+0000c926  h5x7_233                      
+0000c92c  h5x7_234                      
+0000c932  h5x7_235                      
+0000c938  h5x7_236                      
+0000c93e  h5x7_237                      
+0000c944  h5x7_238                      
+0000c94a  h5x7_239                      
+0000c992  h5x7_24                       
+0000c956  h5x7_240                      
+0000c95c  h5x7_241                      
+0000c962  h5x7_242                      
+0000c968  h5x7_243                      
+0000c96e  h5x7_244                      
+0000c974  h5x7_245                      
+0000c97a  h5x7_246                      
+0000c980  h5x7_247                      
+0000c986  h5x7_248                      
+0000c98c  h5x7_249                      
+0000c9bc  h5x7_25                       
+0000c998  h5x7_250                      
+0000c99e  h5x7_251                      
+0000c9a4  h5x7_252                      
+0000c9aa  h5x7_253                      
+0000c9b0  h5x7_254                      
+0000c9b6  h5x7_255                      
+0000c9c2  h5x7_26                       
+0000c9c8  h5x7_27                       
+0000c9ce  h5x7_28                       
+0000c9d4  h5x7_29                       
+0000c9da  h5x7_30                       
+0000c9e0  h5x7_31                       
+0000c9e6  h5x7_32                       
+0000c9ec  h5x7_33                       
+0000c9f2  h5x7_34                       
+0000c9f8  h5x7_35                       
+0000c9fe  h5x7_36                       
+0000ca04  h5x7_37                       
+0000ca0a  h5x7_38                       
+0000ca10  h5x7_39                       
+0000ca16  h5x7_40                       
+0000ca1c  h5x7_41                       
+0000ca22  h5x7_42                       
+0000ca28  h5x7_43                       
+0000ca2e  h5x7_44                       
+0000ca34  h5x7_45                       
+0000ca3a  h5x7_46                       
+0000ca40  h5x7_47                       
+0000ca46  h5x7_48                       
+0000ca4c  h5x7_49                       
+0000ca52  h5x7_50                       
+0000ca58  h5x7_51                       
+0000ca5e  h5x7_52                       
+0000ca64  h5x7_53                       
+0000ca6a  h5x7_54                       
+0000ca70  h5x7_55                       
+0000ca76  h5x7_56                       
+0000ca7c  h5x7_57                       
+0000ca82  h5x7_58                       
+0000ca88  h5x7_59                       
+0000ca8e  h5x7_60                       
+0000ca94  h5x7_61                       
+0000ca9a  h5x7_62                       
+0000caa0  h5x7_63                       
+0000caa6  h5x7_64                       
+0000caac  h5x7_65                       
+0000cab2  h5x7_66                       
+0000cab8  h5x7_67                       
+0000cabe  h5x7_68                       
+0000cac4  h5x7_69                       
+0000caca  h5x7_70                       
+0000cad0  h5x7_71                       
+0000cad6  h5x7_72                       
+0000cadc  h5x7_73                       
+0000cae2  h5x7_74                       
+0000cae8  h5x7_75                       
+0000caee  h5x7_76                       
+0000caf4  h5x7_77                       
+0000cafa  h5x7_78                       
+0000cb00  h5x7_79                       
+0000cb06  h5x7_80                       
+0000cb0c  h5x7_81                       
+0000cb12  h5x7_82                       
+0000cb18  h5x7_83                       
+0000cb1e  h5x7_84                       
+0000cb24  h5x7_85                       
+0000cb2a  h5x7_86                       
+0000cb30  h5x7_87                       
+0000cb36  h5x7_88                       
+0000cb3c  h5x7_89                       
+0000cb42  h5x7_90                       
+0000cb48  h5x7_91                       
+0000cb4e  h5x7_92                       
+0000cb54  h5x7_93                       
+0000cb5a  h5x7_94                       
+0000cb60  h5x7_95                       
+0000cb66  h5x7_96                       
+0000cb6c  h5x7_97                       
+0000cb72  h5x7_98                       
+0000cb78  h5x7_99                       
+0000cc3a  main                          
+00000211  masking                       
+0000d0e6  memcpy                        
+0000cf0e  putPixels                     
 00000201  row                           
-0000c2e6  sendSPI                       
-0000c43e  sendSPICmd                    
-0000c450  sendSPIData                   
-0000c39c  setColumnAddress              
-0000c480  setPageAddress                
-0000c3d6  watchdog_timer                
+0000cf98  sendSPI                       
+0000d0f8  sendSPICmd                    
+0000d10a  sendSPIData                   
+0000d02a  setColumnAddress              
+0000d12c  setPageAddress                
+0000d090  watchdog_timer                
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -537,8 +1075,14 @@ address   name
 00000201  row                           
 00000202  display_x_size                
 00000204  display_y_size                
-00000206  TIMERCOUNT                    
-00000208  TIME_MEASURE                  
+00000206  debug_var                     
+00000207  debug_var_2                   
+00000208  BaselineShift                 
+0000020a  TIMERCOUNT                    
+0000020c  TIME_MEASURE                  
+0000020e  font_data_ptr                 
+00000210  Inverted                      
+00000211  masking                       
 000003b0  _stack                        
 00000400  __STACK_END                   
 000010c0  TLV_CHECKSUM                  
@@ -554,94 +1098,356 @@ address   name
 000010fd  CALBC1_8MHZ                   
 000010fe  CALDCO_1MHZ                   
 000010ff  CALBC1_1MHZ                   
-0000c000  Put_graphic                   
-0000c000  WriteFSGraphic                
-0000c0a0  ClearDisplay                  
-0000c134  __TI_decompress_lzss          
-0000c1b0  InitDisplay                   
-0000c210  __mspabi_srli                 
-0000c21e  __mspabi_srli_15              
-0000c222  __mspabi_srli_14              
-0000c226  __mspabi_srli_13              
-0000c22a  __mspabi_srli_12              
-0000c22e  __mspabi_srli_11              
-0000c232  __mspabi_srli_10              
-0000c236  __mspabi_srli_9               
-0000c23a  __mspabi_srli_8               
-0000c23e  __mspabi_srli_7               
-0000c242  __mspabi_srli_6               
-0000c246  __mspabi_srli_5               
-0000c24a  __mspabi_srli_4               
-0000c24e  __mspabi_srli_3               
-0000c252  __mspabi_srli_2               
-0000c256  __mspabi_srli_1               
-0000c25c  main                          
-0000c2a4  __TI_auto_init_nobinit_nopinit
-0000c2e6  sendSPI                       
-0000c320  __mspabi_srai                 
-0000c32c  __mspabi_srai_15              
-0000c32e  __mspabi_srai_14              
-0000c330  __mspabi_srai_13              
-0000c332  __mspabi_srai_12              
-0000c334  __mspabi_srai_11              
-0000c336  __mspabi_srai_10              
-0000c338  __mspabi_srai_9               
-0000c33a  __mspabi_srai_8               
-0000c33c  __mspabi_srai_7               
-0000c33e  __mspabi_srai_6               
-0000c340  __mspabi_srai_5               
-0000c342  __mspabi_srai_4               
-0000c344  __mspabi_srai_3               
-0000c346  __mspabi_srai_2               
-0000c348  __mspabi_srai_1               
-0000c34c  __mspabi_slli                 
-0000c358  __mspabi_slli_15              
-0000c35a  __mspabi_slli_14              
-0000c35c  __mspabi_slli_13              
-0000c35e  __mspabi_slli_12              
-0000c360  __mspabi_slli_11              
-0000c362  __mspabi_slli_10              
-0000c364  __mspabi_slli_9               
-0000c366  __mspabi_slli_8               
-0000c368  __mspabi_slli_7               
-0000c36a  __mspabi_slli_6               
-0000c36c  __mspabi_slli_5               
-0000c36e  __mspabi_slli_4               
-0000c370  __mspabi_slli_3               
-0000c372  __mspabi_slli_2               
-0000c374  __mspabi_slli_1               
-0000c378  InitDriver                    
-0000c39c  setColumnAddress              
-0000c3ba  _c_int00_noargs               
-0000c3d6  watchdog_timer                
-0000c3f0  Init_gfx                      
-0000c406  __TI_zero_init_nomemset       
-0000c41a  __TI_decompress_none          
-0000c42c  memcpy                        
-0000c43e  sendSPICmd                    
-0000c450  sendSPIData                   
-0000c462  __mspabi_func_epilog_7        
-0000c464  __mspabi_func_epilog_6        
-0000c466  __mspabi_func_epilog_5        
-0000c468  __mspabi_func_epilog_4        
-0000c46a  __mspabi_func_epilog_3        
-0000c46c  __mspabi_func_epilog_2        
-0000c46e  __mspabi_func_epilog_1        
-0000c472  Delay                         
-0000c480  setPageAddress                
-0000c48e  CallInISR                     
-0000c498  __TI_ISR_TRAP                 
-0000c4a0  InitTimerSystem               
-0000c4a6  C$$EXIT                       
-0000c4a6  abort                         
-0000c4ac  _system_pre_init              
-0000c4b0  _system_post_cinit            
-0000c4b2  Testbmp                       
-0000c73a  __TI_Handler_Table_Base       
-0000c740  __TI_Handler_Table_Limit      
-0000c744  __TI_CINIT_Base               
-0000c74c  __TI_CINIT_Limit              
-0000c74c  __TI_CINIT_Warm               
+0000c000  Testbmp                       
+0000c280  Hitachi                       
+0000c480  h5x7_14                       
+0000c49e  h5x7_15                       
+0000c4bc  h5x7_16                       
+0000c4da  h5x7_17                       
+0000c4f8  h5x7_20                       
+0000c516  h5x7_21                       
+0000c534  h5x7_22                       
+0000c552  h5x7_06                       
+0000c566  h5x7_03                       
+0000c57a  h5x7_13                       
+0000c58e  h5x7_08                       
+0000c59e  h5x7_04                       
+0000c5ac  h5x7_05                       
+0000c5b8  h5x7_18                       
+0000c5c2  h5x7_19                       
+0000c5cc  h5x7_02                       
+0000c5d4  h5x7_07                       
+0000c5dc  h5x7_09                       
+0000c5e4  h5x7_10                       
+0000c5ec  h5x7_11                       
+0000c5f4  h5x7_12                       
+0000c5fc  h5x7_00                       
+0000c602  h5x7_01                       
+0000c608  h5x7_100                      
+0000c60e  h5x7_101                      
+0000c614  h5x7_102                      
+0000c61a  h5x7_103                      
+0000c620  h5x7_104                      
+0000c626  h5x7_105                      
+0000c62c  h5x7_106                      
+0000c632  h5x7_107                      
+0000c638  h5x7_108                      
+0000c63e  h5x7_109                      
+0000c644  h5x7_110                      
+0000c64a  h5x7_111                      
+0000c650  h5x7_112                      
+0000c656  h5x7_113                      
+0000c65c  h5x7_114                      
+0000c662  h5x7_115                      
+0000c668  h5x7_116                      
+0000c66e  h5x7_117                      
+0000c674  h5x7_118                      
+0000c67a  h5x7_119                      
+0000c680  h5x7_120                      
+0000c686  h5x7_121                      
+0000c68c  h5x7_122                      
+0000c692  h5x7_123                      
+0000c698  h5x7_124                      
+0000c69e  h5x7_125                      
+0000c6a4  h5x7_126                      
+0000c6aa  h5x7_127                      
+0000c6b0  h5x7_128                      
+0000c6b6  h5x7_129                      
+0000c6bc  h5x7_130                      
+0000c6c2  h5x7_131                      
+0000c6c8  h5x7_132                      
+0000c6ce  h5x7_133                      
+0000c6d4  h5x7_134                      
+0000c6da  h5x7_135                      
+0000c6e0  h5x7_136                      
+0000c6e6  h5x7_137                      
+0000c6ec  h5x7_138                      
+0000c6f2  h5x7_139                      
+0000c6f8  h5x7_140                      
+0000c6fe  h5x7_141                      
+0000c704  h5x7_142                      
+0000c70a  h5x7_143                      
+0000c710  h5x7_144                      
+0000c716  h5x7_145                      
+0000c71c  h5x7_146                      
+0000c722  h5x7_147                      
+0000c728  h5x7_148                      
+0000c72e  h5x7_149                      
+0000c734  h5x7_150                      
+0000c73a  h5x7_151                      
+0000c740  h5x7_152                      
+0000c746  h5x7_153                      
+0000c74c  h5x7_154                      
+0000c752  h5x7_155                      
+0000c758  h5x7_156                      
+0000c75e  h5x7_157                      
+0000c764  h5x7_158                      
+0000c76a  h5x7_159                      
+0000c770  h5x7_160                      
+0000c776  h5x7_161                      
+0000c77c  h5x7_162                      
+0000c782  h5x7_163                      
+0000c788  h5x7_164                      
+0000c78e  h5x7_165                      
+0000c794  h5x7_166                      
+0000c79a  h5x7_167                      
+0000c7a0  h5x7_168                      
+0000c7a6  h5x7_169                      
+0000c7ac  h5x7_170                      
+0000c7b2  h5x7_171                      
+0000c7b8  h5x7_172                      
+0000c7be  h5x7_173                      
+0000c7c4  h5x7_174                      
+0000c7ca  h5x7_175                      
+0000c7d0  h5x7_176                      
+0000c7d6  h5x7_177                      
+0000c7dc  h5x7_178                      
+0000c7e2  h5x7_179                      
+0000c7e8  h5x7_180                      
+0000c7ee  h5x7_181                      
+0000c7f4  h5x7_182                      
+0000c7fa  h5x7_183                      
+0000c800  h5x7_184                      
+0000c806  h5x7_185                      
+0000c80c  h5x7_186                      
+0000c812  h5x7_187                      
+0000c818  h5x7_188                      
+0000c81e  h5x7_189                      
+0000c824  h5x7_190                      
+0000c82a  h5x7_191                      
+0000c830  h5x7_192                      
+0000c836  h5x7_193                      
+0000c83c  h5x7_194                      
+0000c842  h5x7_195                      
+0000c848  h5x7_196                      
+0000c84e  h5x7_197                      
+0000c854  h5x7_198                      
+0000c85a  h5x7_199                      
+0000c860  h5x7_200                      
+0000c866  h5x7_201                      
+0000c86c  h5x7_202                      
+0000c872  h5x7_203                      
+0000c878  h5x7_204                      
+0000c87e  h5x7_205                      
+0000c884  h5x7_206                      
+0000c88a  h5x7_207                      
+0000c890  h5x7_208                      
+0000c896  h5x7_209                      
+0000c89c  h5x7_210                      
+0000c8a2  h5x7_211                      
+0000c8a8  h5x7_212                      
+0000c8ae  h5x7_213                      
+0000c8b4  h5x7_214                      
+0000c8ba  h5x7_215                      
+0000c8c0  h5x7_216                      
+0000c8c6  h5x7_217                      
+0000c8cc  h5x7_218                      
+0000c8d2  h5x7_219                      
+0000c8d8  h5x7_220                      
+0000c8de  h5x7_221                      
+0000c8e4  h5x7_222                      
+0000c8ea  h5x7_223                      
+0000c8f0  h5x7_224                      
+0000c8f6  h5x7_225                      
+0000c8fc  h5x7_226                      
+0000c902  h5x7_227                      
+0000c908  h5x7_228                      
+0000c90e  h5x7_229                      
+0000c914  h5x7_230                      
+0000c91a  h5x7_231                      
+0000c920  h5x7_232                      
+0000c926  h5x7_233                      
+0000c92c  h5x7_234                      
+0000c932  h5x7_235                      
+0000c938  h5x7_236                      
+0000c93e  h5x7_237                      
+0000c944  h5x7_238                      
+0000c94a  h5x7_239                      
+0000c950  h5x7_23                       
+0000c956  h5x7_240                      
+0000c95c  h5x7_241                      
+0000c962  h5x7_242                      
+0000c968  h5x7_243                      
+0000c96e  h5x7_244                      
+0000c974  h5x7_245                      
+0000c97a  h5x7_246                      
+0000c980  h5x7_247                      
+0000c986  h5x7_248                      
+0000c98c  h5x7_249                      
+0000c992  h5x7_24                       
+0000c998  h5x7_250                      
+0000c99e  h5x7_251                      
+0000c9a4  h5x7_252                      
+0000c9aa  h5x7_253                      
+0000c9b0  h5x7_254                      
+0000c9b6  h5x7_255                      
+0000c9bc  h5x7_25                       
+0000c9c2  h5x7_26                       
+0000c9c8  h5x7_27                       
+0000c9ce  h5x7_28                       
+0000c9d4  h5x7_29                       
+0000c9da  h5x7_30                       
+0000c9e0  h5x7_31                       
+0000c9e6  h5x7_32                       
+0000c9ec  h5x7_33                       
+0000c9f2  h5x7_34                       
+0000c9f8  h5x7_35                       
+0000c9fe  h5x7_36                       
+0000ca04  h5x7_37                       
+0000ca0a  h5x7_38                       
+0000ca10  h5x7_39                       
+0000ca16  h5x7_40                       
+0000ca1c  h5x7_41                       
+0000ca22  h5x7_42                       
+0000ca28  h5x7_43                       
+0000ca2e  h5x7_44                       
+0000ca34  h5x7_45                       
+0000ca3a  h5x7_46                       
+0000ca40  h5x7_47                       
+0000ca46  h5x7_48                       
+0000ca4c  h5x7_49                       
+0000ca52  h5x7_50                       
+0000ca58  h5x7_51                       
+0000ca5e  h5x7_52                       
+0000ca64  h5x7_53                       
+0000ca6a  h5x7_54                       
+0000ca70  h5x7_55                       
+0000ca76  h5x7_56                       
+0000ca7c  h5x7_57                       
+0000ca82  h5x7_58                       
+0000ca88  h5x7_59                       
+0000ca8e  h5x7_60                       
+0000ca94  h5x7_61                       
+0000ca9a  h5x7_62                       
+0000caa0  h5x7_63                       
+0000caa6  h5x7_64                       
+0000caac  h5x7_65                       
+0000cab2  h5x7_66                       
+0000cab8  h5x7_67                       
+0000cabe  h5x7_68                       
+0000cac4  h5x7_69                       
+0000caca  h5x7_70                       
+0000cad0  h5x7_71                       
+0000cad6  h5x7_72                       
+0000cadc  h5x7_73                       
+0000cae2  h5x7_74                       
+0000cae8  h5x7_75                       
+0000caee  h5x7_76                       
+0000caf4  h5x7_77                       
+0000cafa  h5x7_78                       
+0000cb00  h5x7_79                       
+0000cb06  h5x7_80                       
+0000cb0c  h5x7_81                       
+0000cb12  h5x7_82                       
+0000cb18  h5x7_83                       
+0000cb1e  h5x7_84                       
+0000cb24  h5x7_85                       
+0000cb2a  h5x7_86                       
+0000cb30  h5x7_87                       
+0000cb36  h5x7_88                       
+0000cb3c  h5x7_89                       
+0000cb42  h5x7_90                       
+0000cb48  h5x7_91                       
+0000cb4e  h5x7_92                       
+0000cb54  h5x7_93                       
+0000cb5a  h5x7_94                       
+0000cb60  h5x7_95                       
+0000cb66  h5x7_96                       
+0000cb6c  h5x7_97                       
+0000cb72  h5x7_98                       
+0000cb78  h5x7_99                       
+0000cb7e  PutChar                       
+0000cb7e  Put_Char                      
+0000cc3a  main                          
+0000ccea  Put_graphic                   
+0000ccea  WriteFSGraphic                
+0000cd6e  __TI_decompress_lzss          
+0000cdea  ClearDisplay                  
+0000ce62  InitDisplay                   
+0000cec2  __mspabi_srli                 
+0000ced0  __mspabi_srli_15              
+0000ced4  __mspabi_srli_14              
+0000ced8  __mspabi_srli_13              
+0000cedc  __mspabi_srli_12              
+0000cee0  __mspabi_srli_11              
+0000cee4  __mspabi_srli_10              
+0000cee8  __mspabi_srli_9               
+0000ceec  __mspabi_srli_8               
+0000cef0  __mspabi_srli_7               
+0000cef4  __mspabi_srli_6               
+0000cef8  __mspabi_srli_5               
+0000cefc  __mspabi_srli_4               
+0000cf00  __mspabi_srli_3               
+0000cf04  __mspabi_srli_2               
+0000cf08  __mspabi_srli_1               
+0000cf0e  putPixels                     
+0000cf56  __TI_auto_init_nobinit_nopinit
+0000cf98  sendSPI                       
+0000cfd2  __mspabi_srai                 
+0000cfde  __mspabi_srai_15              
+0000cfe0  __mspabi_srai_14              
+0000cfe2  __mspabi_srai_13              
+0000cfe4  __mspabi_srai_12              
+0000cfe6  __mspabi_srai_11              
+0000cfe8  __mspabi_srai_10              
+0000cfea  __mspabi_srai_9               
+0000cfec  __mspabi_srai_8               
+0000cfee  __mspabi_srai_7               
+0000cff0  __mspabi_srai_6               
+0000cff2  __mspabi_srai_5               
+0000cff4  __mspabi_srai_4               
+0000cff6  __mspabi_srai_3               
+0000cff8  __mspabi_srai_2               
+0000cffa  __mspabi_srai_1               
+0000cffe  __mspabi_slli                 
+0000d00a  __mspabi_slli_15              
+0000d00c  __mspabi_slli_14              
+0000d00e  __mspabi_slli_13              
+0000d010  __mspabi_slli_12              
+0000d012  __mspabi_slli_11              
+0000d014  __mspabi_slli_10              
+0000d016  __mspabi_slli_9               
+0000d018  __mspabi_slli_8               
+0000d01a  __mspabi_slli_7               
+0000d01c  __mspabi_slli_6               
+0000d01e  __mspabi_slli_5               
+0000d020  __mspabi_slli_4               
+0000d022  __mspabi_slli_3               
+0000d024  __mspabi_slli_2               
+0000d026  __mspabi_slli_1               
+0000d02a  setColumnAddress              
+0000d050  InitDriver                    
+0000d074  _c_int00_noargs               
+0000d090  watchdog_timer                
+0000d0aa  Init_gfx                      
+0000d0c0  __TI_zero_init_nomemset       
+0000d0d4  __TI_decompress_none          
+0000d0e6  memcpy                        
+0000d0f8  sendSPICmd                    
+0000d10a  sendSPIData                   
+0000d11c  __mspabi_func_epilog_7        
+0000d11e  __mspabi_func_epilog_6        
+0000d120  __mspabi_func_epilog_5        
+0000d122  __mspabi_func_epilog_4        
+0000d124  __mspabi_func_epilog_3        
+0000d126  __mspabi_func_epilog_2        
+0000d128  __mspabi_func_epilog_1        
+0000d12c  setPageAddress                
+0000d13c  Delay                         
+0000d14a  CallInISR                     
+0000d154  __TI_ISR_TRAP                 
+0000d15c  InitTimerSystem               
+0000d162  SetFont                       
+0000d162  Set_Font                      
+0000d168  C$$EXIT                       
+0000d168  abort                         
+0000d16e  _system_pre_init              
+0000d172  _system_post_cinit            
+0000d17c  __TI_Handler_Table_Base       
+0000d182  __TI_Handler_Table_Limit      
+0000d186  __TI_CINIT_Base               
+0000d18e  __TI_CINIT_Limit              
+0000d18e  __TI_CINIT_Warm               
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -661,4 +1467,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start          
 ffffffff  __c_args__                    
 
-[213 symbols]
+[481 symbols]

@@ -11,6 +11,7 @@ gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_
 gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types.h
 gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h
 gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
+gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
 gfxEmbedLib/Drivers/nt75451.obj: ../gfxEmbedLib/Drivers/gfxdriver.h
 gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/ccs_base/msp430/include/msp430.h
 gfxEmbedLib/Drivers/nt75451.obj: C:/ti/ccs2010/ccs/ccs_base/msp430/include/msp430g2553.h
@@ -41,6 +42,8 @@ C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_types
 C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_stdint.h:
 
 C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
+
+C:/ti/ccs2010/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
 ../gfxEmbedLib/Drivers/gfxdriver.h:
 

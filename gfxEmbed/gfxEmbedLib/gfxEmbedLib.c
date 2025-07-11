@@ -11,8 +11,21 @@
 #include "Drivers/gfxdriver.h"
 
 
+// Name: Set_Font
+// Function: Select font by name for character mode
+// Parameter: Pointer to font definition table, usually a header file that contains a table
+//            with matching array name(s)
+//--------------------------------------------------------------------------------------------
+void Set_Font(int * fontName){
+    SetFont(fontName);
+}
 
-
+// Name: Put_Character
+// Function: Place a character of the specified font at the specified location on the display
+//--------------------------------------------------------------------------------------------
+void Put_Char(unsigned char c){
+    PutChar(c);
+}
 
 // Name: Put_graphic
 // Function: Fill entire LCD with graphics using a function exposed by the library
