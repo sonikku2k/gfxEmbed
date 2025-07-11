@@ -11,10 +11,12 @@
 #include <stdint.h>             // Use standardized types
 #include "gfxdriver.h"          // Include common display header
 #include "timer.h"
+#include "nt75451.h"
 
 
 // Variables
 uint8_t column = 0;
+uint8_t row = 0;
 
 // Functions
 //---------------------------
@@ -56,8 +58,8 @@ void InitDriver(void){
 
 // Name: sendSPI
 // SPI transmit function
-// By default this is the bit-banger or you can hook a transmit function to real hardware
-//---------------------------------------------------------------------------------------
+// By default this is the bit-banger or you can call a routine to use SPI hardware in your MCU
+//---------------------------------------------------------------------------------------------
 void sendSPI(uint8_t data){
 
     uint8_t bitcount = 0;
@@ -112,18 +114,18 @@ void sendSPIData(uint8_t databyte){
 // Returns: void
 //--------------------------------------------------------------------------------------------------------------
 void InitDisplay(void){
-    sendSPICmd(0xAC);       // Static indicator off
-    sendSPICmd(0xA0);       // ADC SELECT
-    sendSPICmd(0xC0);       // SHL SELECT
-    sendSPICmd(0x40);       // Initial Display Line
-    sendSPICmd(0x00);       // Column address LSB
-    sendSPICmd(0xA6);       // Reverse display OFF
-    sendSPICmd(0x24);       // Set e-Volume = 4
-    sendSPICmd(0x81);       // Set Vref mode
-    sendSPICmd(0x17);       // Value for reference voltage
-    sendSPICmd(0xE1);       // Reset Power Save
-    sendSPICmd(0x2F);       // Turn power ON
-    sendSPICmd(0xAF);       // Turn display ON
+    sendSPICmd(STATIC_INDICATOR_OFF);                   // Static indicator off
+    sendSPICmd(ADC_SELECT_NORMAL);                      // ADC SELECT
+    sendSPICmd(OUTPUT_STATUS_SELECT);                   // SHL SELECT
+    sendSPICmd(DISPLAY_START_LINE_SET);                 // Initial Display Line
+    sendSPICmd(0x00);                                   // Column address LSB
+    sendSPICmd(NORMAL_DISPLAY);                         // Reverse display OFF
+    sendSPICmd(VOLTAGE_REGULATOR_RATIO_SET + 4);        // Set Ratio = 4
+    sendSPICmd(E_VOLUME_SET);                           // Set Electronic volume
+    sendSPICmd(0x17);                                   // E-Volume <= 0x17
+    sendSPICmd(RESET_POWER_SAVING);                     // Reset Power Save modes (if available)
+    sendSPICmd(POWER_CONTROL_SET_ALL_ON);               // Turn power ON
+    sendSPICmd(DISPLAY_ON);                             // Turn display ON
 }
 
 
@@ -141,6 +143,7 @@ void ClearDisplay(void){
     sendSPICmd(0x10);
     sendSPICmd(0x00);
     column = 0;
+    row = 0;
     for (i = 0; i < 160; i++){
 
         if (i >= 128){
