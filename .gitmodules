@@ -1,3 +1,0 @@
-[submodule "gfxEmbed/printf"]
-	path = gfxEmbed/printf
-	url = https://github.com/mpaland/printf.git
