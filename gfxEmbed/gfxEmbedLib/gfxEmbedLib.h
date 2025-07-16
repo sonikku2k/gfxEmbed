@@ -23,6 +23,7 @@ void Init_gfx(void);
 void Put_graphic(uint8_t *bmp);
 void Set_Font(int * fontName);
 void Put_Char(unsigned char c);
+void Clear_Display(void);
 
 
 

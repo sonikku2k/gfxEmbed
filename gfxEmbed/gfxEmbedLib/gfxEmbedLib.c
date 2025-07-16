@@ -9,6 +9,7 @@
 #include <stdint.h>             // Use standardized types
 #include "gfxEmbedLib.h"
 #include "Drivers/gfxdriver.h"
+#include "gfxconfig.h"
 
 
 // Name: Set_Font
@@ -36,6 +37,15 @@ void Put_graphic(uint8_t *bmp){
     WriteFSGraphic(bmp);
 }
 
+// Name: Clear_Display
+// Function: Clears display contents
+// Parameters: void
+// Returns: void
+//---------------------------------------------------------------------------------
+void Clear_Display(void){
+    Clear_Display();
+}
+
 
 // Name: Init_gfx
 // Function: Top-down initialisation of the embedded graphics library
@@ -43,7 +53,7 @@ void Put_graphic(uint8_t *bmp){
 // Returns: void
 //---------------------------------------------------------------------- 
 void Init_gfx(void){
-    InitDriver(160, 32);     // Call init in driver
+    InitDriver();                           // Call init in driver
     InitDisplay();                          // Initialize the display attached
     ClearDisplay();                         // Clear display memory
 }

@@ -10,14 +10,17 @@
 //              for specific projects
 //
 //----------------------------------------------------------------------------------------------------------------------------------------------
+#include "gfxconfig.h"
 
 #ifndef HITACHI5X7_H
 #define HITACHI5X7_H
 
+#ifdef VERTICAL_ORIENTATION
 const char h5x7_00 [] = {
                         0x05,
                         0x55, 0xAA, 0x55, 0xAA, 0x55
 };
+
 const char h5x7_01 [] = {
                          0x05,
                          0x7F, 0x7F, 0x7F, 0x7F, 0x7F
@@ -1074,6 +1077,7 @@ const char h5x7_255 [] = {
                          0x0C, 0x51, 0x50, 0x51, 0x3C
 };
 
+#endif
 /* Font indexing table */
 const int Hitachi [] = {
           (int) &h5x7_00,

@@ -7,6 +7,7 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+#include <stdio.h>
 #include <msp430.h>
 #include "timer.h"
 #include "gfxEmbedLib/gfxEmbedLib.h"          // Include embedded graphics library
@@ -101,7 +102,12 @@ int main(void){
 
     Init_gfx();                                 // Initialize graphics driver
     Put_graphic(Testbmp);
+	Clear_Display();
+	
     Set_Font(Hitachi);                 // Tell the driver which font is to be used
+	printf("Hello, world");
+
+
     Put_Char('H');                            // Print ASCII 
     Put_Char('i');
     Put_Char(' ');
@@ -121,7 +127,6 @@ int main(void){
 
     for(;;){
       Delay (100);
-      //Init_gfx();                                 // Initialize graphics driver
     }
 }
 

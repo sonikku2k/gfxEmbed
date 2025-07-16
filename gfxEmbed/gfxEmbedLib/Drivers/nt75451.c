@@ -13,6 +13,7 @@
 #include "gfxdriver.h"          // Include common display header
 #include "timer.h"
 #include "nt75451.h"
+#include "gfxconfig.h"
 
 
 // Variables
@@ -20,8 +21,8 @@
 uint8_t column = 0;
 uint8_t row = 0;
 
-uint16_t display_x_size = 0;
-uint16_t display_y_size = 0;
+uint16_t display_x_size = DISPLAY_HORIZONTAL_SIZE;
+uint16_t display_y_size = DISPLAY_VERTICAL_SIZE;
 
 int *font_data_ptr;
 
@@ -34,6 +35,59 @@ bool Inverted;
 
 // Functions
 //---------------------------
+
+// Name: sendSPI
+// SPI transmit function
+// By default this is the bit-banger or you can call a routine to use SPI hardware in your MCU
+//---------------------------------------------------------------------------------------------
+void sendSPI(uint8_t data){
+
+    uint8_t bitcount = 0;
+    // Loop to shift out the data bits, MSB first
+    for (bitcount = 0; bitcount < 8; bitcount++){
+        if((data & 0x80) == 0x80){
+            SDATA(set, SDATA_PORT);     // SDATA line = H
+        } else {
+            SDATA(clear, SDATA_PORT);   // SDATA line = L
+        }
+        data <<= 1;     // left shift 1
+        SCLK(set, SCLK_PORT);
+        asm (" nop");
+        asm (" nop");
+        asm (" nop");
+        asm (" nop");
+        SCLK(clear, SCLK_PORT);
+    }
+
+}
+
+
+// Name: sendSPICmd
+// Function: Sends the byte over the SPI bus as a command (C/D = 0)
+// Parameters: Data byte to send
+// Returns: void
+//----------------------------------------------------------------------------------------------------------
+void sendSPICmd(uint8_t cmdbyte){
+
+    CMD_DATA(clear, CMD_DATA_PORT);     // C/D = 0
+    CS(clear, CS_PORT);                 // Lower CS
+    sendSPI(cmdbyte);                   // tx command
+    CS(set, CS_PORT);                   // Raise CS
+}
+
+// Name: sendSPIData
+// Function: Sends the byte over the SPI bus as data (C/D = 1)
+// Parameters: Data byte to send
+// Returns: void
+//----------------------------------------------------------------------------------------------------------
+void sendSPIData(uint8_t databyte){
+
+    CMD_DATA(set, CMD_DATA_PORT);       // C/D = 1
+    CS(clear, CS_PORT);                 // Lower CS
+    sendSPI(databyte);            // tx data
+    CS(set, CS_PORT);                   // Raise CS
+}
+
 
 // Name: setPageAddress
 // Function: Select Display Page (row) to access in the LCD controller
@@ -83,6 +137,34 @@ void SetBaselineShift(uint8_t shift){
 void SetFont(int *fontName){
     font_data_ptr = fontName;
 }
+
+
+// Name: putPixels
+// Function: Places a column (or row) of pixels on the LCD by writing to the LCD
+//           it auto-increments the row and column, and also handles quirks of wide LCD displays
+// Parameters: column or row of pixel data (8 bits = 8 pixels)
+// Returns: void
+//---------------------------------------------------------------------------------------------------------
+void putPixels(uint8_t pixels){
+
+    uint8_t offset;
+    // With this type of controller, if the display is wider than 128 pixels, special handling is required
+    // Majority of displays using this controller (and clones) are 128 pixels wide
+    if (display_x_size > 128){
+        if (column >= 128){
+            //159
+            offset = (uint8_t)(display_x_size - 1) - column;      // (160 - 128 = 32)
+            offset += 0x60; 
+            setPageAddress(row + (display_y_size / 8));
+            setColumnAddress(offset);
+
+        }
+        
+    }
+    sendSPIData(pixels);
+    column++;
+}
+
 
 // Name: PutChar
 // Function: Put a character at the current location on the display with the currently selected font
@@ -170,10 +252,7 @@ void reset_timer(void){
 // Parameters: void
 // Returns: void
 //----------------------------------------------------------------------------------------------------------
-void InitDriver(uint16_t x_size, uint16_t y_size){
-
-    display_x_size = x_size;
-    display_y_size = y_size;
+void InitDriver(void){
 
     CS(set, CS_PORT);                       // Chip Select = high
     CMD_DATA(clear, CMD_DATA_PORT);         // C/D = low
@@ -191,84 +270,8 @@ void InitDriver(uint16_t x_size, uint16_t y_size){
 
 
 
-// Name: sendSPI
-// SPI transmit function
-// By default this is the bit-banger or you can call a routine to use SPI hardware in your MCU
-//---------------------------------------------------------------------------------------------
-void sendSPI(uint8_t data){
-
-    uint8_t bitcount = 0;
-    // Loop to shift out the data bits, MSB first
-    for (bitcount = 0; bitcount < 8; bitcount++){
-        if((data & 0x80) == 0x80){
-            SDATA(set, SDATA_PORT);     // SDATA line = H
-        } else {
-            SDATA(clear, SDATA_PORT);   // SDATA line = L
-        }
-        data <<= 1;     // left shift 1
-        SCLK(set, SCLK_PORT);
-        asm (" nop");
-        asm (" nop");
-        asm (" nop");
-        asm (" nop");
-        SCLK(clear, SCLK_PORT);
-    }
-
-}
 
 
-// Name: putPixels
-// Function: Places a column (or row) of pixels on the LCD by writing to the LCD
-//           it auto-increments the row and column, and also handles quirks of wide LCD displays
-// Parameters: column or row of pixel data (8 bits = 8 pixels)
-// Returns: void
-//---------------------------------------------------------------------------------------------------------
-void putPixels(uint8_t pixels){
-
-    uint8_t offset;
-    // With this type of controller, if the display is wider than 128 pixels, special handling is required
-    // Majority of displays using this controller (and clones) are 128 pixels wide
-    if (display_x_size > 128){
-        if (column >= 128){
-            //159
-            offset = (uint8_t)(display_x_size - 1) - column;      // (160 - 128 = 32)
-            offset += 0x60; 
-            setPageAddress(row + (display_y_size / 8));
-            setColumnAddress(offset);
-
-        }
-        
-    }
-    sendSPIData(pixels);
-    column++;
-}
-
-
-// Name: sendSPICmd
-// Function: Sends the byte over the SPI bus as a command (C/D = 0)
-// Parameters: Data byte to send
-// Returns: void
-//----------------------------------------------------------------------------------------------------------
-void sendSPICmd(uint8_t cmdbyte){
-
-    CMD_DATA(clear, CMD_DATA_PORT);     // C/D = 0
-    CS(clear, CS_PORT);                 // Lower CS
-    sendSPI(cmdbyte);                   // tx command
-    CS(set, CS_PORT);                   // Raise CS
-}
-
-// Name: sendSPIData
-// Function: Sends the byte over the SPI bus as data (C/D = 1)
-// Parameters: Data byte to send
-// Returns: void
-//----------------------------------------------------------------------------------------------------------
-void sendSPIData(uint8_t databyte){
-
-    CMD_DATA(set, CMD_DATA_PORT);       // C/D = 1
-    CS(clear, CS_PORT);                 // Lower CS
-    sendSPI(databyte);            // tx data
-    CS(set, CS_PORT);                   // Raise CS
-}
 
 
 
@@ -306,7 +309,6 @@ void InitDisplay(void){
 //--------------------------------------------------------------------------------------------------------------
 void ClearDisplay(void){
     uint16_t i, j = 0;
-    uint8_t offset = 0;
 
     column = 0;
     row = 0;
@@ -342,7 +344,6 @@ void ClearDisplay(void){
 //-----------------------------------------------------------------------------
 void WriteFSGraphic(uint8_t *bmpdata){
     uint16_t i, j, k = 0;
-    uint8_t offset = 0;
 
     column = 0;
     row = 0;
