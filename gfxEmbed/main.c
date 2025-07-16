@@ -6,12 +6,11 @@
 //                This application runs tests against the library on a MSP-EXP430G2ET Launchpad
 //
 //----------------------------------------------------------------------------------------------------------------------
-
-#include <stdio.h>
 #include <msp430.h>
 #include "timer.h"
 #include "gfxEmbedLib/gfxEmbedLib.h"          // Include embedded graphics library
 #include "gfxEmbedLib/fonts/hitachi5x7.h"     // Include font as header file
+
 
 
 
@@ -101,12 +100,12 @@ int main(void){
     InitTimerSystem();
 
     Init_gfx();                                 // Initialize graphics driver
-    Put_graphic(Testbmp);
+//    Put_graphic(Testbmp);
 	Clear_Display();
 	
     Set_Font(Hitachi);                 // Tell the driver which font is to be used
-	printf("Hello, world");
-
+	
+	
 
     Put_Char('H');                            // Print ASCII 
     Put_Char('i');

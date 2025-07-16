@@ -43,7 +43,7 @@ void Put_graphic(uint8_t *bmp){
 // Returns: void
 //---------------------------------------------------------------------------------
 void Clear_Display(void){
-    Clear_Display();
+    ClearDisplay();
 }
 
 
