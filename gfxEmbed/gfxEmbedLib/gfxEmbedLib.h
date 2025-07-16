@@ -24,6 +24,8 @@ void Put_graphic(uint8_t *bmp);
 void Set_Font(int * fontName);
 void Put_Char(unsigned char c);
 void Clear_Display(void);
+void Print_Text(char *string);
+void Set_Location(uint8_t x, uint8_t y);
 
 
 

@@ -54,6 +54,8 @@ void ClearDisplay(void);
 void WriteFSGraphic(uint8_t *bmpdata);
 void SetFont(int *fontName);
 void PutChar(unsigned char c);
+void PrintText(char *string);
+void gotoxy(uint8_t x, uint8_t y);
 
 
 #endif /* GFXDRIVER_H_ */

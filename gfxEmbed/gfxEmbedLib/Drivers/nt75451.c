@@ -268,16 +268,40 @@ void InitDriver(void){
 }
 
 
+// Name: PrintText
+// Function: Basic text print function in the absence of printf() on constrained systems. Does NOT provide escape sequences or any format specifiers
+// Parameters: Pointer to text string (array of bytes)
+// Returns: void
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+void PrintText(char * string){
+
+    char c = 0;
+    int x = 0;
+
+    for(;;){
+        c = string[x];
+        if(c == 0){
+            return;
+        } else {
+            PutChar(c);
+        }
+        x++;
+    }
+
+}
 
 
-
-
-
-
-
-
-
-
+// Name: gotoxy
+// Function: Set current location on the LCD display
+// Parameters: X location in pixels from top left corner, Y location in lines from top left corner
+// Returns: void
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+void gotoxy(uint8_t x, uint8_t y){
+    column = x;
+    row = y;
+    setColumnAddress(column);
+    setPageAddress(row);
+}
 
 //--------------------------------------------------------------------------------------------------------------
 // Name: InitDisplay

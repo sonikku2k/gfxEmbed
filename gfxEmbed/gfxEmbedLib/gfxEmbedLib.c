@@ -12,6 +12,22 @@
 #include "gfxconfig.h"
 
 
+void Set_Location(uint8_t x, uint8_t y){
+
+    gotoxy(x, y);
+
+}
+
+
+// Name: Print_Text
+// Function: Print a string of characters on the display - Useful on VERY SMALL micros like PIC and some MSP430 where printf() is too expensive
+// Parameters: Pointer to string of characters
+// Returns: void
+//----------------------------------------------------------------------------------------------------------------------------------------------
+void Print_Text(char * string){
+    PrintText(string);
+}
+
 // Name: Set_Font
 // Function: Select font by name for character mode
 // Parameter: Pointer to font definition table, usually a header file that contains a table
