@@ -9,6 +9,15 @@
                 "name": "gfxEmbed",
                 "resourceId": "/gfxEmbed"
             }
+        },
+        {
+            "name": "OutOfBox_EmulStorageKeyboard",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "OutOfBox_EmulStorageKeyboard",
+                "resourceId": "/OutOfBox_EmulStorageKeyboard"
+            }
         }
     ]
 }

@@ -108,7 +108,7 @@ int main(void){
 	Set_Location( 50, 0);
 	Print_Text("SONIC2K INDUSTRIES");
 	Set_Location (50, 1);
-	Print_Text("Got Rings?");
+	Print_Text("Got Rings??");
 	Set_Location(50, 2);
 	Print_Text("Go to sonic2k.com");
 	
